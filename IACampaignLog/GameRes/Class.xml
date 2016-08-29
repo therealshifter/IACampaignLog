@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Set id="0" name="Subversive Tactics" character="-1">
+    <Class id="0" name="Prey Upon Doubt" cost="0" />
+    <Class id="1" name="Savage Weaponry" cost="1" />
+    <Class id="2" name="Surgical Strike" cost="1" />
+    <Class id="3" name="Heavy Pressure" cost="2" />
+    <Class id="4" name="Exploit Weakness" cost="2" />
+    <Class id="5" name="Executioner" cost="3" />
+    <Class id="6" name="Weary Target" cost="3" />
+    <Class id="7" name="Oppression" cost="4" />
+    <Class id="8" name="No Quarter" cost="4" />
+  </Set>
+  <Set id="1" name="Military Might" character="-1">
+    <Class id="9" name="Show of Force" cost="0" />
+    <Class id="10" name="Riot Grenades" cost="1" />
+    <Class id="11" name="Combat Medic" cost="1" />
+    <Class id="12" name="Assault Armor" cost="2" />
+    <Class id="13" name="Endless Ranks" cost="2" />
+    <Class id="14" name="Sustained Fire" cost="3" />
+    <Class id="15" name="Shock Troopers" cost="3" />
+    <Class id="16" name="Shock and Awe" cost="4" />
+    <Class id="17" name="Combat Veterans" cost="4" />
+  </Set>
+  <Set id="2" name="Technological Superiority" character="-1">
+    <Class id="18" name="Experimental Arms" cost="0" />
+    <Class id="19" name="Jetpacks" cost="1" />
+    <Class id="20" name="Technical Support" cost="1" />
+    <Class id="21" name="Hidden Detonators" cost="2" />
+    <Class id="22" name="Failsafe" cost="2" />
+    <Class id="23" name="Cloaking Device" cost="3" />
+    <Class id="24" name="Arc Blasters" cost="3" />
+    <Class id="25" name="Superior Augments" cost="4" />
+    <Class id="26" name="Adaptive Weapons" cost="4" />
+  </Set>
+  <Set id="3" name="Gideon Argus" character="3">
+    <Class id="27" name="Holdout Blaster" cost="0" />
+    <Class id="28" name="Called Shot" cost="1" />
+    <Class id="29" name="Military Efficiency" cost="1" />
+    <Class id="30" name="Mobile Tactician" cost="2" />
+    <Class id="31" name="Air of Command" cost="2" />
+    <Class id="32" name="For the Cause" cost="3" />
+    <Class id="33" name="Rallying Shout" cost="3" />
+    <Class id="34" name="Hammer and Anvil" cost="4" />
+    <Class id="35" name="Masterstroke" cost="4" />
+  </Set>
+  <Set id="4" name="Mak Eshka'rey" character="5">
+    <Class id="36" name="Longrifle" cost="0" />
+    <Class id="46" name="Supply Network" cost="1" />
+    <Class id="47" name="Disengage" cost="1" />
+    <Class id="48" name="Target Acquired" cost="2" />
+    <Class id="49" name="Jeswandi Training" cost="2" />
+    <Class id="50" name="Execute" cost="3" />
+    <Class id="51" name="Expertise" cost="3" />
+    <Class id="52" name="No Escape" cost="4" />
+    <Class id="53" name="Decoy" cost="4" />
+  </Set>
+  <Set id="5" name="Fenn Signis" character="1">
+    <Class id="37" name="Infantry Rifle" cost="0" />
+    <Class id="38" name="Tactical Movement" cost="1" />
+    <Class id="39" name="Take Cover" cost="1" />
+    <Class id="40" name="Adrenaline Rush" cost="2" />
+    <Class id="41" name="Weapon Expert" cost="2" />
+    <Class id="42" name="Suppressive Fire" cost="3" />
+    <Class id="43" name="Trench Fighter" cost="3" />
+    <Class id="44" name="Superior Positioning" cost="4" />
+    <Class id="45" name="Rebel Elite" cost="4" />
+  </Set>
+  <Set id="6" name="Diala Passil" character="0">
+    <Class id="54" name="Plasteel Staff" cost="0" />
+    <Class id="55" name="Force Adept" cost="1" />
+    <Class id="56" name="Force Throw" cost="1" />
+    <Class id="57" name="Defensive Stance" cost="2" />
+    <Class id="58" name="Battle Meditation" cost="2" />
+    <Class id="59" name="Art of Movement" cost="3" />
+    <Class id="60" name="Snap Kick" cost="3" />
+    <Class id="61" name="Way of the Sarlacc" cost="4" />
+    <Class id="62" name="Dancing Weapon" cost="4" />
+  </Set>
+  <Set id="7" name="Jyn Odan" character="4">
+    <Class id="63" name="Vintage Blaster" cost="0" />
+    <Class id="64" name="Smuggler's Luck" cost="1" />
+    <Class id="65" name="Quick as a Whip" cost="1" />
+    <Class id="66" name="Cheap Shot" cost="2" />
+    <Class id="67" name="Roll With It" cost="2" />
+    <Class id="68" name="Gunslinger" cost="3" />
+    <Class id="69" name="Get Cocky" cost="3" />
+    <Class id="70" name="Trick Shot" cost="4" />
+    <Class id="71" name="Sidewinder" cost="4" />
+  </Set>
+  <Set id="8" name="Gaarkhan" character="2">
+    <Class id="72" name="Vibro-Ax" cost="0" />
+    <Class id="73" name="Wookiee Loyalty" cost="1" />
+    <Class id="74" name="Wookiee Foritude" cost="1" />
+    <Class id="75" name="Ferocity" cost="2" />
+    <Class id="76" name="Staggering Blow" cost="2" />
+    <Class id="77" name="Vicious Strike" cost="3" />
+    <Class id="78" name="Rampage" cost="3" />
+    <Class id="79" name="Brutal Cleave" cost="4" />
+    <Class id="80" name="Unstoppable" cost="4" />
+  </Set>
+</Resource>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Campaign id="0" name="Core" allowsidemissions="true" allowforcedmissions="true" startingcredits="0" startingimpxp="0" startinginfluence="0" startingrebelxp="0">
+    <MissionTemplate>
+      <Mission name="Aftermath" type="Story" threatlevel="2" itemtiers="I" />
+      <Mission name="" type="Side" threatlevel="2" itemtiers="I" />
+      <Mission name="" type="Story" threatlevel="3" itemtiers="I" />
+      <Mission name="" type="Side" threatlevel="3" itemtiers="I, II" />
+      <Mission name="" type="Story" threatlevel="4" itemtiers="II" />
+      <Mission name="" type="Side" threatlevel="4" itemtiers="II" />
+      <Mission name="" type="Side" threatlevel="4" itemtiers="II, III" />
+      <Mission name="" type="Story" threatlevel="5" itemtiers="III" />
+      <Mission name="" type="Side" threatlevel="5" itemtiers="III" />
+      <Mission name="" type="Story" threatlevel="6" itemtiers="III" />
+      <Mission name="" type="Story" threatlevel="6" itemtiers="III" />
+    </MissionTemplate>
+  </Campaign>
+  <Campaign id="1" name="Twin Shadows" allowsidemissions="false" allowforcedmissions="false" startingcredits="400" startingimpxp="3" startinginfluence="0" startingrebelxp="3">
+    <MissionTemplate>
+      <Mission name="Hunted Down" type="Story" threatlevel="3" itemtiers="I, II" />
+      <Mission name="" type="Story" threatlevel="4" itemtiers="II" />
+      <Mission name="" type="Story" threatlevel="5" itemtiers="II, III" />
+      <Mission name="" type="Story" threatlevel="5" itemtiers="II, III" />
+    </MissionTemplate>
+  </Campaign>
+  <Campaign id="2" name="Return To Hoth" allowsidemissions="true" allowforcedmissions="true" startingcredits="0" startingimpxp="0" startinginfluence="0" startingrebelxp="0">
+    <MissionTemplate>
+      <Mission name="Battle Of Hoth" type="Story" threatlevel="2" itemtiers="I" />
+      <Mission name="" type="Side" threatlevel="2" itemtiers="I" />
+      <Mission name="" type="Story" threatlevel="3" itemtiers="I" />
+      <Mission name="" type="Side" threatlevel="3" itemtiers="I, II" />
+      <Mission name="" type="Side" threatlevel="4" itemtiers="II" />
+      <Mission name="Return To Echo Base" type="Story" threatlevel="0" itemtiers="II" />
+      <Mission name="" type="Story" threatlevel="4" itemtiers="II, III" />
+      <Mission name="" type="Side" threatlevel="5" itemtiers="III" />
+      <Mission name="" type="Side" threatlevel="5" itemtiers="III" />
+      <Mission name="" type="Story" threatlevel="6" itemtiers="III" />
+      <Mission name="Our Last Hope" type="Story" threatlevel="6" itemtiers="III" />
+    </MissionTemplate>
+  </Campaign>
+  <Campaign id="3" name="The Bespin Gambit" allowsidemissions="false" allowforcedmissions="false" startingcredits="400" startingimpxp="3" startinginfluence="0" startingrebelxp="3">
+    <MissionTemplate>
+      <Mission name="Reclamation" type="Story" threatlevel="3" itemtiers="I, II" />
+      <Mission name="" type="Story" threatlevel="4" itemtiers="II" />
+      <Mission name="" type="Story" threatlevel="5" itemtiers="II, III" />
+      <Mission name="" type="Story" threatlevel="5" itemtiers="II, III" />
+    </MissionTemplate>
+  </Campaign>
+</Resource>

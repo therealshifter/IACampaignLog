@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Set id="0" name="Lord Vader's Command" character="-1">
+    <Agenda id="0" name="As You Wish" cost="1" agendatype="Secret" />
+    <Agenda id="1" name="A Dark Power" cost="2" agendatype="Secret" />
+    <Agenda id="2" name="Dark Obsession" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="1" name="Imperial Industry" character="-1">
+    <Agenda id="3" name="Interrogation Protocol" cost="1" agendatype="Secret" />
+    <Agenda id="4" name="Restorative Supplies" cost="2" agendatype="Ongoing" />
+    <Agenda id="5" name="Means of Production" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="2" name="Soldiers For Hire" character="-1">
+    <Agenda id="6" name="By Any Means Necessary" cost="1" agendatype="Secret" />
+    <Agenda id="7" name="No Disintegrations" cost="2" agendatype="Ongoing" />
+    <Agenda id="8" name="Predator and Prey" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="3" name="Retaliation" character="-1">
+    <Agenda id="9" name="Tactical Explosives" cost="1" agendatype="Secret" />
+    <Agenda id="10" name="Weakness Revealed" cost="2" agendatype="Ongoing" />
+    <Agenda id="11" name="Breaking Point" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="4" name="For The Right Price" character="-1">
+    <Agenda id="12" name="Hired Help" cost="1" agendatype="Secret" />
+    <Agenda id="13" name="High-Value Target" cost="2" agendatype="Ongoing" />
+    <Agenda id="14" name="Wanted" cost="4" agendatype="ForcedMission" />
+  </Set>
+  <Set id="5" name="Agents Of The Empire" character="-1">
+    <Agenda id="15" name="Imperial Informants" cost="1" agendatype="Secret" />
+    <Agenda id="16" name="Tracking Beacon" cost="1" agendatype="Ongoing" />
+    <Agenda id="17" name="Impounded" cost="4" agendatype="ForcedMission" />
+  </Set>
+  <Set id="6" name="Imperial Discipline" character="-1">
+    <Agenda id="18" name="Impending Doom" cost="1" agendatype="Secret" />
+    <Agenda id="19" name="Tactical Maneuvering" cost="1" agendatype="Secret" />
+    <Agenda id="20" name="Fire at Will" cost="2" agendatype="Ongoing" />
+  </Set>
+  <Set id="7" name="Imperial Security Bureau" character="-1">
+    <Agenda id="21" name="Imperial Operative" cost="1" agendatype="Secret" />
+    <Agenda id="22" name="ISB Enforcers" cost="2" agendatype="Secret" />
+    <Agenda id="23" name="Internal Affairs" cost="2" agendatype="Ongoing" />
+  </Set>
+  <Set id="8" name="Droid Uprising" character="-1">
+    <Agenda id="24" name="Sabotaged Plans" cost="1" agendatype="Secret" />
+    <Agenda id="25" name="Firepower Upgrade" cost="1" agendatype="Ongoing" />
+    <Agenda id="26" name="Binary Revolution" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="9" name="The General's Scheme" character="-1">
+    <Agenda id="27" name="Special Modifications" cost="1" agendatype="Secret" />
+    <Agenda id="28" name="Inspiring Command" cost="2" agendatype="Ongoing" />
+    <Agenda id="29" name="Forest Ambush" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="10" name="Vader's Fist" character="-1">
+    <Agenda id="30" name="Set For Stun" cost="1" agendatype="Secret" />
+    <Agenda id="31" name="To the Last Man" cost="2" agendatype="Secret" />
+    <Agenda id="32" name="Bunker Buster" cost="3" agendatype="SideMission" />
+  </Set>
+</Resource>
