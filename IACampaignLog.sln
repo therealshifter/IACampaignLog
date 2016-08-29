@@ -3,12 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IACampaignLog", "IACampaignLog\IACampaignLog.csproj", "{A3AD07D7-8E2A-4272-A874-03B43610AD48}"
 EndProject
+Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "Deployment", "Deployment.mdproj", "{60F12F43-A2D4-44CB-AC91-B6136E5F933D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60F12F43-A2D4-44CB-AC91-B6136E5F933D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{60F12F43-A2D4-44CB-AC91-B6136E5F933D}.Release|x86.ActiveCfg = Release|Any CPU
 		{A3AD07D7-8E2A-4272-A874-03B43610AD48}.Debug|x86.ActiveCfg = Debug|x86
 		{A3AD07D7-8E2A-4272-A874-03B43610AD48}.Debug|x86.Build.0 = Debug|x86
 		{A3AD07D7-8E2A-4272-A874-03B43610AD48}.Release|x86.ActiveCfg = Release|x86

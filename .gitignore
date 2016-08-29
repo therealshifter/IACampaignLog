@@ -46,3 +46,5 @@ bld/
 *.pidb
 *.svclog
 *.scc
+*.pidb
+*.mdproj
