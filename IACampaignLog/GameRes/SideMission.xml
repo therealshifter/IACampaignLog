@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <SideMission id="0" name="Temptation" missiontype="Red" />
+  <SideMission id="1" name="Loose Cannon" missiontype="Red" />
+  <SideMission id="2" name="Brushfire" missiontype="Red" />
+  <SideMission id="3" name="Indebted" missiontype="Red" />
+  <SideMission id="4" name="Friends of Old" missiontype="Red" />
+  <SideMission id="5" name="High Moon" missiontype="Red" />
+  <SideMission id="6" name="Sympathy for the Rebellion" missiontype="Grey" />
+  <SideMission id="7" name="Generous Donations" missiontype="Grey" />
+  <SideMission id="8" name="Luxury Cruise" missiontype="Grey" />
+  <SideMission id="9" name="Sorry About the Mess" missiontype="Green" />
+  <SideMission id="10" name="The Spice Job" missiontype="Green" />
+  <SideMission id="11" name="A Simple Task" missiontype="Grey" />
+  <SideMission id="12" name="Target of Opportunity" missiontype="Green" />
+  <SideMission id="13" name="Homecoming" missiontype="Green" />
+  <SideMission id="14" name="Open to Interpretation" missiontype="Green" />
+  <SideMission id="15" name="Imperial Entanglements" missiontype="Grey" />
+  <SideMission id="16" name="Brace For Impact" missiontype="Green" />
+  <SideMission id="17" name="Celebration" missiontype="Grey" />
+  <SideMission id="18" name="Viper's Den" missiontype="Grey" />
+  <SideMission id="19" name="Captured" missiontype="Forced" />
+</Resource>

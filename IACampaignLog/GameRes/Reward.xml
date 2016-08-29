@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Reward id="0" name="Imperial Industry" />
+  <Reward id="1" name="Shadow Suit" />
+  <Reward id="2" name="Shu Yen's Lightsaber" />
+  <Reward id="3" name="501st Training" />
+  <Reward id="4" name="Special Operations" />
+  <Reward id="5" name="Old Wounds" />
+  <Reward id="6" name="Supply Deficit" />
+  <Reward id="7" name="Heroic" />
+  <Reward id="8" name="Legendary" />
+  <Reward id="9" name="Peacemaker" />
+  <Reward id="10" name="Life Debt" />
+  <Reward id="11" name="Fearless Leader" />
+  <Reward id="12" name="Veteran Prowess" />
+  <Reward id="13" name="The Ways of the Force" />
+  <Reward id="14" name="Allied Operations" />
+  <Reward id="15" name="Rebel Recon" />
+  <Reward id="16" name="Adrenal Implant" />
+  <Reward id="17" name="Intimidation" />
+  <Reward id="18" name="Quickdraw Holster" />
+  <Reward id="19" name="Boba Fett (villain)" />
+  <Reward id="20" name="IG-88 (villain)" />
+  <Reward id="21" name="Han Solo, Scoundrel (ally)" />
+  <Reward id="22" name="Luke Skywalker, Hero of the Rebellion (ally)" />
+  <Reward id="23" name="Chewbacca, Loyal Wookiee (ally)" />
+  <Reward id="24" name="Rebel Saboteur (ally)" />
+  <Reward id="25" name="Rebel Trooper (ally)" />
+  <Reward id="26" name="R2-D2 (ally)" />
+  <Reward id="27" name="C-3PO (ally)" />
+  <Reward id="28" name="General Weiss (villain)" />
+  <Reward id="29" name="Royal Guard Champion (villain)" />
+  <Reward id="30" name="Darth Vader, Lord of the Sith (villain)" />
+</Resource>

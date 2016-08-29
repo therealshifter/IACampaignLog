@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Item id="0" name="Extended Haft" cost="300" tier="I" />
+  <Item id="1" name="Marksman Barrel" cost="300" tier="I" />
+  <Item id="2" name="DL-44" cost="500" tier="I" />
+  <Item id="3" name="Combat Coat" cost="500" tier="I" />
+  <Item id="4" name="Balanced Hilt" cost="300" tier="I" />
+  <Item id="5" name="Vibroblade" cost="300" tier="I" />
+  <Item id="6" name="Armored Gauntlets" cost="300" tier="I" />
+  <Item id="7" name="DH-17" cost="200" tier="I" />
+  <Item id="8" name="Portable Medkit" cost="450" tier="I" />
+  <Item id="9" name="Tactical Display" cost="300" tier="I" />
+  <Item id="10" name="Survival Gear" cost="250" tier="I" />
+  <Item id="11" name="E-11" cost="400" tier="I" />
+  <Item id="12" name="434 'Deathhammer'" cost="600" tier="II" />
+  <Item id="13" name="A280" cost="600" tier="II" />
+  <Item id="14" name="T-21" cost="900" tier="II" />
+  <Item id="15" name="Vibro Knucklers" cost="400" tier="II" />
+  <Item id="16" name="BD-1 Vibro-Ax" cost="600" tier="II" />
+  <Item id="17" name="High-Impact Guard" cost="500" tier="II" />
+  <Item id="18" name="Spread Barrel" cost="300" tier="II" />
+  <Item id="19" name="Overcharger" cost="300" tier="II" />
+  <Item id="20" name="Laminate Armor" cost="700" tier="II" />
+  <Item id="21" name="Extra Ammunition" cost="300" tier="II" />
+  <Item id="22" name="Slicing Tools" cost="250" tier="II" />
+  <Item id="23" name="Sporting Blaster" cost="900" tier="III" />
+  <Item id="24" name="Pulse Cannon" cost="1200" tier="III" />
+  <Item id="25" name="DXR-6" cost="1000" tier="III" />
+  <Item id="26" name="Force Pike" cost="1100" tier="III" />
+  <Item id="27" name="Personal Shields" cost="550" tier="III" />
+  <Item id="28" name="Reinforced Helmet" cost="300" tier="III" />
+  <Item id="29" name="Combat Visor" cost="350" tier="III" />
+  <Item id="30" name="Combat Knife" cost="500" tier="III" />
+  <Item id="31" name="Shock Emitter" cost="500" tier="III" />
+  <Item id="32" name="Disruption Cell" cost="600" tier="III" />
+  <Item id="33" name="Telescoping Sights" cost="400" tier="III" />
+  <Item id="34" name="Combat Coat" cost="500" tier="II" />
+  <Item id="35" name="Laminate Armor" cost="700" tier="III" />
+</Resource>

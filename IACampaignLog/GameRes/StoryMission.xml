@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <StoryMission id="0" name="Aftermath" campaign="0" />
+  <StoryMission id="1" name="A New Threat" campaign="0" />
+  <StoryMission id="2" name="Imperial Hospitality" campaign="0" />
+  <StoryMission id="3" name="Under Siege" campaign="0" />
+  <StoryMission id="4" name="Fly Solo" campaign="0" />
+  <StoryMission id="5" name="Incoming" campaign="0" />
+  <StoryMission id="6" name="Drawn In" campaign="0" />
+  <StoryMission id="7" name="Chain of Command" campaign="0" />
+  <StoryMission id="8" name="The Source" campaign="0" />
+  <StoryMission id="9" name="Last Stand" campaign="0" />
+  <StoryMission id="10" name="Desperate Hour" campaign="0" />
+  <StoryMission id="11" name="Hunted Down" campaign="1" />
+  <StoryMission id="12" name="Battle Of Hoth" campaign="2" />
+  <StoryMission id="13" name="Return To Echo Base" campaign="2" />
+  <StoryMission id="14" name="Our Last Hope" campaign="2" />
+  <StoryMission id="15" name="Reclamation" campaign="3" />
+</Resource>

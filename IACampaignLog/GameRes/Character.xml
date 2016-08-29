@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Resource>
+  <Character id="0" name="Diala Passil" sidemission="0" />
+  <Character id="1" name="Fenn Signis" sidemission="2" />
+  <Character id="2" name="Gaarkhan" sidemission="3" />
+  <Character id="3" name="Gideon Argus" sidemission="4" />
+  <Character id="4" name="Jyn Odan" sidemission="5" />
+  <Character id="5" name="Mak Eshka'rey" sidemission="1" />
+</Resource>
