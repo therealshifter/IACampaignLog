@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A3AD07D7-8E2A-4272-A874-03B43610AD48}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>IACampaignLog</RootNamespace>
+    <AssemblyName>IACampaignLog</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="model\" />
+    <Folder Include="controller\" />
+    <Folder Include="GameRes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="model\Game.cs" />
+    <Compile Include="model\Player.cs" />
+    <Compile Include="model\ImperialPlayer.cs" />
+    <Compile Include="AppMain.cs" />
+    <Compile Include="CreateGameForm.view.cs" />
+    <Compile Include="MenuForm.cs" />
+    <Compile Include="CreateGameForm.cs" />
+    <Compile Include="model\Agenda.cs" />
+    <Compile Include="model\CardSet.cs" />
+    <Compile Include="model\Reward.cs" />
+    <Compile Include="model\Character.cs" />
+    <Compile Include="model\ClassCard.cs" />
+    <Compile Include="model\Mission.cs" />
+    <Compile Include="MenuForm.view.cs" />
+    <Compile Include="model\Identifiable.cs" />
+    <Compile Include="model\Item.cs" />
+    <Compile Include="model\HeroPlayer.cs" />
+    <Compile Include="model\ISerialisable.cs" />
+    <Compile Include="controller\CharacterController.cs" />
+    <Compile Include="controller\SingletonListController.cs" />
+    <Compile Include="controller\AgendaController.cs" />
+    <Compile Include="controller\ClassController.cs" />
+    <Compile Include="controller\RewardController.cs" />
+    <Compile Include="controller\ItemController.cs" />
+    <Compile Include="controller\ConfigController.cs" />
+    <Compile Include="MaintainResourcesForm.cs" />
+    <Compile Include="MaintainResourcesForm.view.cs" />
+    <Compile Include="EditFormBase.cs" />
+    <Compile Include="EditFormBase.view.cs" />
+    <Compile Include="controller\CardSetController.cs" />
+    <Compile Include="GameDetailsPanel.cs" />
+    <Compile Include="GameDetailsPanel.view.cs" />
+    <Compile Include="controller\GameController.cs" />
+    <Compile Include="ViewGameForm.cs" />
+    <Compile Include="ViewGameForm.view.cs" />
+    <Compile Include="model\SideMission.cs" />
+    <Compile Include="model\StoryMission.cs" />
+    <Compile Include="controller\SideMissionController.cs" />
+    <Compile Include="controller\StoryMissionController.cs" />
+    <Compile Include="MissionPanel.cs" />
+    <Compile Include="MissionPanel.view.cs" />
+    <Compile Include="PlayerPanel.cs" />
+    <Compile Include="PlayerPanel.view.cs" />
+    <Compile Include="model\Campaign.cs" />
+    <Compile Include="model\MissionHeader.cs" />
+    <Compile Include="controller\CampaignController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Core">
+    </Reference>
+    <Reference Include="System.Configuration">
+    </Reference>
+    <Reference Include="System.Drawing">
+    </Reference>
+    <Reference Include="System.Net">
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+    </Reference>
+    <Reference Include="System.Xml">
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+    </Reference>
+    <Reference Include="System">
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="GameRes\Agenda.xml">
+    </None>
+    <None Include="GameRes\Character.xml">
+    </None>
+    <None Include="GameRes\Class.xml" />
+    <None Include="GameRes\Item.xml" />
+    <None Include="GameRes\Reward.xml" />
+    <None Include="GameRes\StoryMission.xml" />
+    <None Include="GameRes\SideMission.xml" />
+  </ItemGroup>
+</Project>
