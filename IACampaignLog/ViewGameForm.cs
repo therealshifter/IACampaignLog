@@ -175,7 +175,6 @@ namespace IACampaignLog
          {
             if (_currentGame.GameCampaign.AllowForcedMissions && a.AgendaCardType == Agenda.AgendaType.ForcedMission)
             {
-               sender.CurrentPlayer.PurchasedAgendas.Add(a);
                AddForcedMission(a.Name);
                allowed = true;
             }

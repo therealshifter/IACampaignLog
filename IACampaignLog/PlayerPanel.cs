@@ -87,12 +87,17 @@ namespace IACampaignLog
                   MessageBox.Show("Not enough Influence to purchase selected Agenda.\nCost " + a.InfluenceCost + " Inf");
                else
                {
-                  if (AgendaPurchased == null || AgendaPurchased(this, a, EventArgs.Empty))
+                  (_player as ImperialPlayer).PurchasedAgendas.Add(a);
+                  if (AgendaPurchased != null && !AgendaPurchased(this, a, EventArgs.Empty))
+                  {
+                     (_player as ImperialPlayer).PurchasedAgendas.Remove(a);
+                     MessageBox.Show("Cannot purchase selected Agenda");
+                  }
+                  else
                   {
                      (_player as ImperialPlayer).Influence -= a.InfluenceCost;
                      _addItemCombo.SelectedItem = _emptyAgenda;
                   }
-                  else MessageBox.Show("Cannot purchase selected Agenda");
                }
             }
          }
