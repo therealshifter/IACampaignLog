@@ -36,6 +36,7 @@
     <Folder Include="model\" />
     <Folder Include="controller\" />
     <Folder Include="GameRes\" />
+    <Folder Include="SavedGames\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="model\Game.cs" />
@@ -131,6 +132,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="GameRes\Campaign.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SavedGames\GameList.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
