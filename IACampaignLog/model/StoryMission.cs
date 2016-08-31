@@ -17,7 +17,7 @@ namespace IACampaignLog
          XElement x = new XElement("StoryMission");
          x.SetAttributeValue("id", this.Id);
          x.SetAttributeValue("name", this.Name);
-         x.SetAttributeValue("campaign", this.MissionCampaign);
+         x.SetAttributeValue("campaign", this.MissionCampaign.Id);
          return x;
       }
       

@@ -58,7 +58,7 @@ namespace IACampaignLog
       public virtual void Load()
       {
          this.ListOfT.Clear();
-         System.Console.WriteLine("Loading resource " + _resourcePath);
+         
          if (System.IO.File.Exists(_resourcePath))
          {
             XDocument xdoc = XDocument.Load(_resourcePath);
@@ -68,12 +68,10 @@ namespace IACampaignLog
             }
             HasChanges = false;
          }
-         else System.Console.WriteLine("Unable to to load resource: " + _resourcePath);
       }
       
       public virtual void Save(Func<T, XElement> serialiseT)
       {
-         System.Console.WriteLine("Saving resource: " + _resourcePath);
          if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(_resourcePath)))
          {System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(_resourcePath));}
          

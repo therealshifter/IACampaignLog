@@ -122,6 +122,8 @@ namespace IACampaignLog
          _agendasListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
          _campaignListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
          _campaignMissionListView.ItemSelectionChanged += Handle_campaignMissionsItemSelectiongChanged;
+         _classSetCombo.TextChanged += Handle_classSetComboSelectionChanged;
+         _classSetCombo.SelectionChangeCommitted += Handle_classSetComboSelectionChanged;
          _charactersListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
          _classesListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
          _itemsListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
@@ -131,6 +133,14 @@ namespace IACampaignLog
          _campaignAddMissionButton.Click += Handle_campaignAddMissionButtonClick;
          _campaignSaveMissionButton.Click += Handle_campaignSaveMissionButtonClick;
          _campaignCancelMissionButton.Click += Handle_campaignCancelMissionButtonClick;
+      }
+
+      void Handle_classSetComboSelectionChanged (object sender, EventArgs e)
+      {
+         CardSet<ClassCard> selectedSet = (CardSet<ClassCard>)_classSetCombo.SelectedItem;
+         _classCharacterCombo.Enabled = selectedSet == null;
+         if (selectedSet != null)
+            _classCharacterCombo.SelectedItem = selectedSet.AssociatedCharacter;
       }
 
       void Handle_campaignCancelMissionButtonClick (object sender, EventArgs e)
@@ -342,7 +352,7 @@ namespace IACampaignLog
                      CampaignController.GetInstance().HasChanges = true;
                      MessageBox.Show("Campaign saved successfully");
                   }
-                  Console.WriteLine(selected.MissionTemplate.Count.ToString());
+               
                   selected.StartingCredits = (int)_campaignStartingCreditsText.Value;
                   selected.StartingImperialXP = (int)_campaignStartingImpXpText.Value;
                   selected.StartingInfluence = (int)_campaignStartingInfluenceText.Value;
@@ -660,7 +670,6 @@ namespace IACampaignLog
          _classXpText.Text = string.Empty;
          _classSetList = new List<CardSet<ClassCard>>(ClassController.GetInstance().ListOfT);
          _classSetCombo.Enabled = true;
-         _classCharacterCombo.Enabled = true;
          _classSetCombo.DataSource = null;
          _classSetCombo.DataSource = _classSetList;
          _classSetCombo.DisplayMember = "Name";
@@ -691,6 +700,7 @@ namespace IACampaignLog
             }
          }
          _classesListView.SelectedItems.Clear();
+         _classCharacterCombo.Enabled = _classSetCombo.SelectedItem == null;
       }
       
       private void RefreshItemPanel(bool reloadList)
