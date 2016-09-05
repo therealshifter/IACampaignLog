@@ -80,11 +80,15 @@
     <Compile Include="controller\StoryMissionController.cs" />
     <Compile Include="MissionPanel.cs" />
     <Compile Include="MissionPanel.view.cs" />
-    <Compile Include="PlayerPanel.cs" />
-    <Compile Include="PlayerPanel.view.cs" />
     <Compile Include="model\Campaign.cs" />
     <Compile Include="model\MissionHeader.cs" />
     <Compile Include="controller\CampaignController.cs" />
+    <Compile Include="PlayerPanelBase.cs" />
+    <Compile Include="PlayerPanelBase.view.cs" />
+    <Compile Include="HeroPlayerPanel.view.cs" />
+    <Compile Include="HeroPlayerPanel.cs" />
+    <Compile Include="ImperialPlayerPanel.view.cs" />
+    <Compile Include="ImperialPlayerPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core">

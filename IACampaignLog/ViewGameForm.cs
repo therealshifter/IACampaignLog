@@ -76,8 +76,8 @@ namespace IACampaignLog
             throw new InvalidOperationException("Must load game before loading missions");
          
          IList<string> storyMissions = new List<string>(StoryMissionController.GetInstance().StoryMissionsForCampaign(_currentGame.GameCampaign.Id).Select((x) => x.Name));
-         IList<string> sideMissions = new List<string>(_currentGame.ImpPlayer.PurchasedAgendas.Where((x) => x.AgendaCardType == Agenda.AgendaType.SideMission).Select((x) => x.Name).Union(_currentGame.SelectedSideMissions.Select((x) => x.Name)));
-         IList<string> forcedMissions = new List<string>(_currentGame.ImpPlayer.PurchasedAgendas.Where((x) => x.AgendaCardType == Agenda.AgendaType.ForcedMission).Select((x) => x.Name).Union(SideMissionController.GetInstance().SideMissionsOfType(SideMission.MissionType.Forced).Select((x) => x.Name)));
+         IList<string> sideMissions = new List<string>(_currentGame.ImpPlayer.PurchasedAgendas.Where((x) => x.Key.AgendaCardType == Agenda.AgendaType.SideMission).Select((x) => x.Key.Name).Union(_currentGame.SelectedSideMissions.Select((x) => x.Name)));
+         IList<string> forcedMissions = new List<string>(_currentGame.ImpPlayer.PurchasedAgendas.Where((x) => x.Key.AgendaCardType == Agenda.AgendaType.ForcedMission).Select((x) => x.Key.Name).Union(SideMissionController.GetInstance().SideMissionsOfType(SideMission.MissionType.Forced).Select((x) => x.Name)));
          
          storyMissions.Insert(0, string.Empty);
          sideMissions.Insert(0, string.Empty);
@@ -147,20 +147,21 @@ namespace IACampaignLog
          
          //Load players
          int ypos = 5;
-         PlayerPanel<ImperialPlayer> impPlayerControl = new PlayerPanel<ImperialPlayer>();
+         ImperialPlayerPanel impPlayerControl = new ImperialPlayerPanel();
          impPlayerControl.Location = new System.Drawing.Point(0, ypos);
          _playerListPanel.Controls.Add(impPlayerControl);
-         impPlayerControl.LoadImperialPlayer(_currentGame.ImpPlayer, _currentGame.SelectedAgendaSets);
+         impPlayerControl.LoadPlayer(_currentGame.ImpPlayer, _currentGame.SelectedAgendaSets, _currentGame.Heroes);
          impPlayerControl.AgendaPurchased += HandleImpPlayerControlAgendaPurchased;
          ypos = impPlayerControl.Location.Y + impPlayerControl.Height + 5;
          
          foreach (HeroPlayer h in _currentGame.Heroes)
          {
-            PlayerPanel<HeroPlayer> playerControl = new PlayerPanel<HeroPlayer>();
+            HeroPlayerPanel playerControl = new HeroPlayerPanel();
             playerControl.Location = new System.Drawing.Point(0, ypos);
             _playerListPanel.Controls.Add(playerControl);
-            playerControl.LoadHeroPlayer(h, _currentGame.Heroes);
+            playerControl.LoadPlayer(h, _currentGame.Heroes);
             playerControl.ItemPurchased += HandlePlayerControlItemPurchased;
+            playerControl.ItemSold += HandlePlayerControlItemSold;
             ypos = playerControl.Location.Y + playerControl.Height + 5;
          }
          
@@ -168,7 +169,7 @@ namespace IACampaignLog
          UpdateHeroCreditsPoolLabel();
       }
 
-      bool HandleImpPlayerControlAgendaPurchased (PlayerPanel<ImperialPlayer> sender, Agenda a, EventArgs e)
+      bool HandleImpPlayerControlAgendaPurchased (PlayerPanelBase<ImperialPlayer> sender, Agenda a, EventArgs e)
       {
          bool allowed = a.AgendaCardType == Agenda.AgendaType.Secret || a.AgendaCardType == Agenda.AgendaType.Ongoing;
          if (!allowed)
@@ -190,7 +191,7 @@ namespace IACampaignLog
          UpdateHeroCreditsPoolLabel();
       }
 
-      bool HandlePlayerControlItemPurchased (PlayerPanel<HeroPlayer> sender, Item i, EventArgs e)
+      bool HandlePlayerControlItemPurchased (PlayerPanelBase<HeroPlayer> sender, Item i, EventArgs e)
       {
          if (_currentGame.HeroCreditsPool - i.CreditCost >= 0)
          {
@@ -201,6 +202,11 @@ namespace IACampaignLog
             return false;
       }
       
+      void HandlePlayerControlItemSold (PlayerPanelBase<HeroPlayer> sender, Item i, EventArgs e)
+      {
+         _currentGame.HeroCreditsPool += i.CreditCost / 2;
+      }
+
       public void UpdateHeroCreditsPoolLabel()
       {
          _heroCreditsLabel.Text = "Hero Credits: " + _currentGame.HeroCreditsPool;

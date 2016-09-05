@@ -9,7 +9,7 @@ namespace IACampaignLog
 	{
       public delegate void InfluenceChangedEventHandeler(ImperialPlayer sender, EventArgs e);
       
-		private IList<Agenda> _purchasedAgendas;
+		private IDictionary<Agenda, Character> _purchasedAgendas;
       private IList<Agenda> _spentAgendas;
       private int _influence;
 		public event InfluenceChangedEventHandeler InfluenceChanged;
@@ -17,7 +17,7 @@ namespace IACampaignLog
 		public ImperialPlayer (string name, CardSet<ClassCard> impClass) : 
 			base(name, CharacterController.GetInstance().ImperialCharacter, impClass)
 		{
-			_purchasedAgendas = new List<Agenda>();
+			_purchasedAgendas = new Dictionary<Agenda, Character>();
          _spentAgendas = new List<Agenda>();
 		}
 		
@@ -31,7 +31,7 @@ namespace IACampaignLog
             if (InfluenceChanged != null) {InfluenceChanged(this, EventArgs.Empty);}
          }
       }
-		public IList<Agenda> PurchasedAgendas {get{return _purchasedAgendas;}}
+		public IDictionary<Agenda, Character> PurchasedAgendas {get{return _purchasedAgendas;}}
       public IList<Agenda> SpentAgendas {get{return _spentAgendas;}}
 		
 		public new XElement Serialise()
@@ -40,8 +40,13 @@ namespace IACampaignLog
 			elem.Name = "ImperialPlayer";
 			elem.SetAttributeValue("influence", Influence);
 			XElement agendaElem = new XElement("PurchasedAgendas");
-			agendaElem.Add(from Agenda a in PurchasedAgendas
-			               select new XElement("Agenda", a.Id));
+         foreach (KeyValuePair<Agenda, Character> kv in PurchasedAgendas)
+         {
+            XElement a = new XElement("Agenda", kv.Key.Id);
+            if (kv.Value != null)
+               a.SetAttributeValue("target", kv.Value.Id);
+			   agendaElem.Add(a);
+         }
 			elem.Add(agendaElem);
 			return elem;
 		}
@@ -54,10 +59,13 @@ namespace IACampaignLog
 						return i;
 					});
 			imp.Influence = int.Parse(elem.Attribute("influence").Value);
-			IEnumerable<Agenda> agendas = from XElement e in elem.Element("PurchasedAgendas").Elements("Agenda")
-										  let agendaId = int.Parse(e.Value)
-										  select AgendaController.GetInstance().FindAgendaWithId(agendaId);
-			foreach (Agenda a in agendas) {imp.PurchasedAgendas.Add(a);}
+			IEnumerable<KeyValuePair<Agenda, Character>> agendas =
+               from XElement e in elem.Element("PurchasedAgendas").Elements("Agenda")
+				   let agenda = AgendaController.GetInstance().FindAgendaWithId(int.Parse(e.Value))
+               let charId = int.Parse(e.Attribute("target") == null ? "-1" : e.Attribute("target").Value)
+               let character = charId < 0 ? null : CharacterController.GetInstance().FindWithId(charId)
+				   select new KeyValuePair<Agenda, Character>(agenda, character);
+			foreach (KeyValuePair<Agenda, Character> a in agendas) {imp.PurchasedAgendas.Add(a.Key, a.Value);}
 			return imp;
 		}
 	}
