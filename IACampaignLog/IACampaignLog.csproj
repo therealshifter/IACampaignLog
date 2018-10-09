@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -32,30 +32,27 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="model\" />
+    <Folder Include="controller\" />
+    <Folder Include="GameRes\" />
+    <Folder Include="SavedGames\" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="model\Game.cs" />
     <Compile Include="model\Player.cs" />
     <Compile Include="model\ImperialPlayer.cs" />
     <Compile Include="AppMain.cs" />
-    <Compile Include="CreateGameForm.view.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MenuForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CreateGameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="CreateGameForm.view.cs" />
+    <Compile Include="MenuForm.cs" />
+    <Compile Include="CreateGameForm.cs" />
     <Compile Include="model\Agenda.cs" />
     <Compile Include="model\CardSet.cs" />
     <Compile Include="model\Reward.cs" />
     <Compile Include="model\Character.cs" />
     <Compile Include="model\ClassCard.cs" />
     <Compile Include="model\Mission.cs" />
-    <Compile Include="MenuForm.view.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MenuForm.view.cs" />
     <Compile Include="model\Identifiable.cs" />
     <Compile Include="model\Item.cs" />
     <Compile Include="model\HeroPlayer.cs" />
@@ -67,49 +64,24 @@
     <Compile Include="controller\RewardController.cs" />
     <Compile Include="controller\ItemController.cs" />
     <Compile Include="controller\ConfigController.cs" />
-    <Compile Include="MaintainResourcesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MaintainResourcesForm.view.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditFormBase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EditFormBase.view.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="MaintainResourcesForm.cs" />
+    <Compile Include="MaintainResourcesForm.view.cs" />
+    <Compile Include="EditFormBase.cs" />
+    <Compile Include="EditFormBase.view.cs" />
     <Compile Include="controller\CardSetController.cs" />
-    <Compile Include="GameDetailsPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GameDetailsPanel.view.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="GameDetailsPanel.cs" />
+    <Compile Include="GameDetailsPanel.view.cs" />
     <Compile Include="controller\GameController.cs" />
-    <Compile Include="model\ThreatMission.cs" />
-    <Compile Include="ViewGameForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewGameForm.view.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="ViewGameForm.cs" />
+    <Compile Include="ViewGameForm.view.cs" />
     <Compile Include="model\SideMission.cs" />
     <Compile Include="model\StoryMission.cs" />
     <Compile Include="controller\SideMissionController.cs" />
     <Compile Include="controller\StoryMissionController.cs" />
-    <Compile Include="MissionPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MissionPanel.view.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PlayerPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PlayerPanel.view.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="MissionPanel.cs" />
+    <Compile Include="MissionPanel.view.cs" />
+    <Compile Include="PlayerPanel.cs" />
+    <Compile Include="PlayerPanel.view.cs" />
     <Compile Include="model\Campaign.cs" />
     <Compile Include="model\MissionHeader.cs" />
     <Compile Include="controller\CampaignController.cs" />

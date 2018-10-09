@@ -10,8 +10,7 @@ namespace IACampaignLog
          Red,
          Green,
          Grey,
-         Forced,
-         Threat
+         Forced
       }
       
       public SideMission (int id, string name, MissionType missionType) : base(id, name)
@@ -21,7 +20,7 @@ namespace IACampaignLog
       
       public MissionType SideMissionType {get; set;}
       
-      public virtual XElement Serialise()
+      public XElement Serialise()
       {
          XElement x = new XElement("SideMission");
          x.SetAttributeValue("id", this.Id);

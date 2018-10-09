@@ -10,8 +10,8 @@ namespace IACampaignLog
       private Button _addItemButton, _addClassCardButton, _addRewardButton;
       private ComboBox _addItemCombo, _addClassCombo, _addRewardCombo;
       private ListView _itemListView, _classCardListView, _rewardListView;
-      private ContextMenuStrip _itemContextMenu, _agendaContextMenu, _classContextMenu;
-      private ToolStripMenuItem _tradeItemMenuItem, _sellItemMenuItem, _discardAgendaMenuItem, _sellClassItemMenuItem;
+      private ContextMenu _tradeItemContextMenu;
+      private MenuItem _tradeMenuItem;
          
       public void Initialise()
       {
@@ -148,28 +148,13 @@ namespace IACampaignLog
          _rewardListView.View = View.Details;
          _rewardListView.Columns.Add("Id");
          _rewardListView.Columns.Add("Name");
-         _rewardListView.Columns.Add("Type");
          _rewardListView.Columns[0].Width = 0;
-         _rewardListView.Columns[1].Width += 55;
-         _rewardListView.Columns[2].Width -= 11;
          this.Controls.Add(_rewardListView);
          
-         //Item context menu
-         _itemContextMenu = new ContextMenuStrip();
-         _tradeItemMenuItem = new ToolStripMenuItem("Trade");
-         _sellItemMenuItem = new ToolStripMenuItem("Sell", null, HandleSellItem);
-         _itemContextMenu.Items.Add(_tradeItemMenuItem);
-         _itemContextMenu.Items.Add(_sellItemMenuItem);
-
-         //Agenda context menu
-         _agendaContextMenu = new ContextMenuStrip();
-         _discardAgendaMenuItem = new ToolStripMenuItem("Discard", null, HandleDiscardAgenda);
-         _agendaContextMenu.Items.Add(_discardAgendaMenuItem);
-
-         //Class context menu
-         _classContextMenu = new ContextMenuStrip();
-         _sellClassItemMenuItem = new ToolStripMenuItem("Sell", null, HandleSellClassItem);
-         _classContextMenu.Items.Add(_sellClassItemMenuItem);
+         //Item trade context menu
+         _tradeItemContextMenu = new ContextMenu();
+         _tradeMenuItem = new MenuItem("Trade");
+         _tradeItemContextMenu.MenuItems.Add(_tradeMenuItem);
       }
    }
 }

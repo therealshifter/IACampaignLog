@@ -8,18 +8,17 @@ namespace IACampaignLog
 	public class ImperialPlayer : Player
 	{
       public delegate void InfluenceChangedEventHandeler(ImperialPlayer sender, EventArgs e);
-      public delegate void AgendaDiscardedEventHandler(ImperialPlayer sender, EventArgs e);
+      
 		private IList<Agenda> _purchasedAgendas;
-      private IList<Agenda> _discardedAgendas;
+      private IList<Agenda> _spentAgendas;
       private int _influence;
 		public event InfluenceChangedEventHandeler InfluenceChanged;
-      public event AgendaDiscardedEventHandler AgendaDiscarded;
       
 		public ImperialPlayer (string name, CardSet<ClassCard> impClass) : 
 			base(name, CharacterController.GetInstance().ImperialCharacter, impClass)
 		{
 			_purchasedAgendas = new List<Agenda>();
-         _discardedAgendas = new List<Agenda>();
+         _spentAgendas = new List<Agenda>();
 		}
 		
 		public int Influence
@@ -29,31 +28,11 @@ namespace IACampaignLog
          set
          {
             _influence = value;
-            InfluenceChanged?.Invoke(this, EventArgs.Empty);
+            if (InfluenceChanged != null) {InfluenceChanged(this, EventArgs.Empty);}
          }
       }
-
 		public IList<Agenda> PurchasedAgendas {get{return _purchasedAgendas;}}
-      public IList<Agenda> DiscardedAgendas {get{return _discardedAgendas;}}
-
-      public void RaiseAgendaDiscardedEvent(object sender)
-      {
-         if (AgendaDiscarded != null)
-         {
-            AgendaDiscarded(this, EventArgs.Empty);
-         }
-      }
-
-      public void DiscardAgenda(int agendaId)
-      {
-         Agenda agendaToDiscard = PurchasedAgendas.Single((a) => a.Id == agendaId);
-         if (agendaToDiscard != null)
-         {
-            PurchasedAgendas.Remove(agendaToDiscard);
-            DiscardedAgendas.Add(agendaToDiscard);
-            RaiseAgendaDiscardedEvent(agendaToDiscard);
-         }
-      }
+      public IList<Agenda> SpentAgendas {get{return _spentAgendas;}}
 		
 		public new XElement Serialise()
 		{
@@ -64,11 +43,7 @@ namespace IACampaignLog
 			agendaElem.Add(from Agenda a in PurchasedAgendas
 			               select new XElement("Agenda", a.Id));
 			elem.Add(agendaElem);
-         XElement discardedAgendaElem = new XElement("DiscardedAgendas");
-         discardedAgendaElem.Add(from Agenda a in DiscardedAgendas
-                        select new XElement("Agenda", a.Id));
-         elem.Add(discardedAgendaElem);
-         return elem;
+			return elem;
 		}
 		
 		public static ImperialPlayer Deserialise(XElement elem)
@@ -83,11 +58,7 @@ namespace IACampaignLog
 										  let agendaId = int.Parse(e.Value)
 										  select AgendaController.GetInstance().FindAgendaWithId(agendaId);
 			foreach (Agenda a in agendas) {imp.PurchasedAgendas.Add(a);}
-         IEnumerable<Agenda> discardedAgendas = from XElement e in elem.Element("DiscardedAgendas").Elements("Agenda")
-                                       let agendaId = int.Parse(e.Value)
-                                       select AgendaController.GetInstance().FindAgendaWithId(agendaId);
-         foreach (Agenda a in discardedAgendas) {imp.DiscardedAgendas.Add(a);}
-         return imp;
+			return imp;
 		}
 	}
 }

@@ -8,8 +8,8 @@ namespace IACampaignLog
 	public class HeroPlayer : Player
 	{
 		private IList<Item> _purchasedItems;
-      public delegate void ItemEventHandler(object sender, EventArgs e);
-      public event ItemEventHandler ItemTraded;
+      public delegate void ItemTradedEventHandler(object sender, EventArgs e);
+      public event ItemTradedEventHandler ItemTraded;
 		
 		public HeroPlayer (string name, Character heroCharacter, CardSet<ClassCard> heroClass) : 
 			base(name, heroCharacter, heroClass)

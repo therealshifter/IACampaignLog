@@ -36,11 +36,11 @@ namespace IACampaignLog
                  select c).ToList();
       }
       
-      public ClassCard AddClassCard(CardSet<ClassCard> classSet, string name, int xpCost, bool isItem)
+      public ClassCard AddClassCard(CardSet<ClassCard> classSet, string name, int xpCost)
       {
          if (string.IsNullOrWhiteSpace(name))
          {throw new ArgumentException("Class name cannot be empty");}
-         return base.AddToSet(classSet, (x) => new ClassCard(x, name, xpCost, isItem));
+         return base.AddToSet(classSet, (x) => new ClassCard(x, name, xpCost));
       }
       
    }

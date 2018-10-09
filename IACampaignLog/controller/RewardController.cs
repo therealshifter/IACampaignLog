@@ -19,17 +19,12 @@ namespace IACampaignLog
          return (RewardController)_instance;
       }
       
-      public Reward AddReward(string name, Reward.RewardType rType)
+      public Reward AddReward(string name)
       {
          if (string.IsNullOrEmpty(name))
          {throw new ArgumentException("Reward name cannot be null or empty");}
          
-         return base.AddT((x) => new Reward(x, name, rType));
-      }
-
-      public IList<Reward> RewardsOfType(Reward.RewardType rType)
-      {
-         return ListOfT.Where((x) => x.RewardSubType == rType).ToList();
+         return base.AddT((x) => new Reward(x, name));
       }
       
    }

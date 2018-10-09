@@ -74,11 +74,6 @@ namespace IACampaignLog
          }
          else
             sideMissions = new List<SideMission>();
-         if (_gameDetails.SelectedCampaign.IncludeThreatMissions)
-         {
-            foreach (SideMission sm in SideMissionController.GetInstance().ThreatMissions())
-            {sideMissions.Add(sm);}
-         }
          newGame = GameController.GetInstance().AddGame(_gameDetails.Name, DateTime.Today, _gameDetails.SelectedCampaign, impPlayer, players, agendas, missions, sideMissions);
          newGame.HeroCreditsPool = _gameDetails.SelectedCampaign.StartingCredits * players.Count();
          return newGame;

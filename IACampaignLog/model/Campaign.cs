@@ -18,7 +18,6 @@ namespace IACampaignLog
       
       public bool AllowSideMissions {get; set;}
       public bool AllowForcedMissions {get; set;}
-      public bool IncludeThreatMissions {get; set;}
       public int StartingRebelXP {get; set;}
       public int StartingImperialXP {get; set;}
       public int StartingCredits {get; set;}
@@ -38,7 +37,6 @@ namespace IACampaignLog
          x.SetAttributeValue("name", this.Name);
          x.SetAttributeValue("allowsidemissions", this.AllowSideMissions);
          x.SetAttributeValue("allowforcedmissions", this.AllowForcedMissions);
-         x.SetAttributeValue("includethreatmissions", this.IncludeThreatMissions);
          x.SetAttributeValue("startingcredits", this.StartingCredits);
          x.SetAttributeValue("startingimpxp", this.StartingImperialXP);
          x.SetAttributeValue("startinginfluence", this.StartingInfluence);
@@ -55,7 +53,6 @@ namespace IACampaignLog
          string name = toObject.Attribute("name").Value;
          bool allowSides = bool.Parse(toObject.Attribute("allowsidemissions").Value);
          bool allowForced = bool.Parse(toObject.Attribute("allowforcedmissions").Value);
-         bool includeThreat = bool.Parse(toObject.Attribute("includethreatmissions").Value);
          int startingCredits = int.Parse(toObject.Attribute("startingcredits").Value);
          int startingImpXp = int.Parse(toObject.Attribute("startingimpxp").Value);
          int startingInfluence = int.Parse(toObject.Attribute("startinginfluence").Value);
@@ -65,7 +62,6 @@ namespace IACampaignLog
          Campaign newObj = new Campaign(id, name, missions){
             AllowSideMissions = allowSides,
             AllowForcedMissions = allowForced,
-            IncludeThreatMissions = includeThreat,
             StartingCredits = startingCredits,
             StartingImperialXP = startingImpXp,
             StartingInfluence = startingInfluence,

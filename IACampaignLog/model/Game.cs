@@ -9,11 +9,11 @@ namespace IACampaignLog
 	{
       public delegate void CreditsChangedEventHandler(Object sender, EventArgs e);
       public event CreditsChangedEventHandler CreditsChanged;
-	   private DateTime _gameDate;
-	   private Campaign _gameCampaign;
-	   private IList<HeroPlayer> _heroes;
-	   private ImperialPlayer _impPlayer;
-	   private IList<CardSet<Agenda>> _selectedAgendaSets;
+		private DateTime _gameDate;
+		private Campaign _gameCampaign;
+		private IList<HeroPlayer> _heroes;
+		private ImperialPlayer _impPlayer;
+		private IList<CardSet<Agenda>> _selectedAgendaSets;
       private IList<SideMission> _selectedSideMissions;
       private IList<Mission> _missions;
       private int _heroCredits;
@@ -55,8 +55,6 @@ namespace IACampaignLog
 		public IList<SideMission> SelectedSideMissions {get{return _selectedSideMissions;}}
       public string AvailableSideMission1 {get; set;}
       public string AvailableSideMission2 {get; set;}
-      public ThreatMission AvailableThreatMission1 {get; set;}
-      public ThreatMission AvailableThreatMission2 {get; set;}
       
       public int HeroCreditsPool
       {
@@ -97,10 +95,6 @@ namespace IACampaignLog
             elem.SetAttributeValue("availableside1", AvailableSideMission1);
          if (AvailableSideMission2 != null)
             elem.SetAttributeValue("availableside2", AvailableSideMission2);
-         if (AvailableThreatMission1 != null && AvailableThreatMission1.Id >= 0)
-            elem.SetAttributeValue("availableThreat1", AvailableThreatMission1.Id);
-         if (AvailableThreatMission2 != null && AvailableThreatMission2.Id >= 0)
-            elem.SetAttributeValue("availableThreat2", AvailableThreatMission2.Id);
          elem.Add(this.ImpPlayer.Serialise());
          XElement playersElem = new XElement("Players");
          foreach (HeroPlayer h in Heroes) {playersElem.Add(h.Serialise());}
@@ -137,22 +131,10 @@ namespace IACampaignLog
          string availableSide2 = null;
          if (elem.Attribute("availableside2") != null)
             availableSide2 = elem.Attribute("availableside2").Value;
-         ThreatMission tm1, tm2;
-         tm1 = tm2 = null;
-         if (elem.Attribute("availableThreat1") != null)
-         {
-            tm1 = (ThreatMission)SideMissionController.GetInstance().FindWithId(int.Parse(elem.Attribute("availableThreat1").Value));
-         }
-         if (elem.Attribute("availableThreat2") != null)
-         {
-            tm2 = (ThreatMission)SideMissionController.GetInstance().FindWithId(int.Parse(elem.Attribute("availableThreat2").Value));
-         }
          g = new Game(g, imp, heroes, agendaSets, missions, sideMissions);
          g.HeroCreditsPool = int.Parse(elem.Attribute("credits").Value);
          g.AvailableSideMission1 = availableSide1;
          g.AvailableSideMission2 = availableSide2;
-         g.AvailableThreatMission1 = tm1;
-         g.AvailableThreatMission2 = tm2;
 			return g;
 		}
       

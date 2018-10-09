@@ -13,7 +13,6 @@ namespace IACampaignLog
       private IList<CardSet<ClassCard>> _classSetList;
       private IList<Character> _classCharacterList;
       private IList<Campaign> _campaignList;
-      private IList<Reward> _baneRewardList;
       private IList<KeyValuePair<Agenda.AgendaType, string>> _agendaTypeList;
       private IList<KeyValuePair<SideMission.MissionType, string>> _sideMissionTypeList;
       private IList<SideMission> _characterSideMissionsList;
@@ -24,7 +23,6 @@ namespace IACampaignLog
       private StoryMission _emptyCampaignMissionName;
       private int _selectedListItemId;
       private int _selectedCampaignMissionIndex;
-      private IList<KeyValuePair<Reward.RewardType, string>> _rewardTypeList;
       
       private enum Maintain
       {
@@ -35,8 +33,7 @@ namespace IACampaignLog
          Item,
          Reward,
          SideMission,
-         StoryMission,
-         ThreatMission
+         StoryMission
       }
       
       public MaintainResourcesForm ()
@@ -54,11 +51,10 @@ namespace IACampaignLog
          _maintainItemsList.Add(new KeyValuePair<Maintain, string>(Maintain.Reward, "Reward"));
          _maintainItemsList.Add(new KeyValuePair<Maintain, string>(Maintain.SideMission, "Side Mission"));
          _maintainItemsList.Add(new KeyValuePair<Maintain, string>(Maintain.StoryMission, "Story Mission"));
-         _maintainItemsList.Add(new KeyValuePair<Maintain, string>(Maintain.ThreatMission, "Threat Mission"));
          _maintainCombo.SelectedIndexChanged += Handle_maintainComboSelectedIndexChanged;
+         _maintainCombo.DataSource = _maintainItemsList;
          _maintainCombo.DisplayMember = "Value";
          _maintainCombo.ValueMember = "Key";
-         _maintainCombo.DataSource = _maintainItemsList;
          _maintainCombo.SelectedIndex = -1;
          _maintainCombo.SelectedIndex = 0;
          
@@ -67,9 +63,9 @@ namespace IACampaignLog
          _itemTierList.Add(new KeyValuePair<Item.ItemTier, string>(Item.ItemTier.I, "Tier 1"));
          _itemTierList.Add(new KeyValuePair<Item.ItemTier, string>(Item.ItemTier.II, "Tier 2"));
          _itemTierList.Add(new KeyValuePair<Item.ItemTier, string>(Item.ItemTier.III, "Tier 3"));
+         _itemTierComboBox.DataSource = _itemTierList;
          _itemTierComboBox.DisplayMember = "Value";
          _itemTierComboBox.ValueMember = "Key";
-         _itemTierComboBox.DataSource = _itemTierList;
          _itemTierComboBox.SelectedIndex = 0;
          
          //Agenda type selected data
@@ -78,9 +74,9 @@ namespace IACampaignLog
          _agendaTypeList.Add(new KeyValuePair<Agenda.AgendaType, string>(Agenda.AgendaType.ForcedMission, "Forced Mission"));
          _agendaTypeList.Add(new KeyValuePair<Agenda.AgendaType, string>(Agenda.AgendaType.Ongoing, "Ongoing"));
          _agendaTypeList.Add(new KeyValuePair<Agenda.AgendaType, string>(Agenda.AgendaType.Secret, "Secret"));
+         _agendaTypeCombo.DataSource = _agendaTypeList;
          _agendaTypeCombo.DisplayMember = "Value";
          _agendaTypeCombo.ValueMember = "Key";
-         _agendaTypeCombo.DataSource = _agendaTypeList;
          
          //Side mission colour selected data
          _sideMissionTypeList = new List<KeyValuePair<SideMission.MissionType, string>>();
@@ -88,9 +84,9 @@ namespace IACampaignLog
          _sideMissionTypeList.Add(new KeyValuePair<SideMission.MissionType, string>(SideMission.MissionType.Green, "Green (Ally)"));
          _sideMissionTypeList.Add(new KeyValuePair<SideMission.MissionType, string>(SideMission.MissionType.Grey, "Grey (Card)"));
          _sideMissionTypeList.Add(new KeyValuePair<SideMission.MissionType, string>(SideMission.MissionType.Forced, "Forced"));
+         _sideMissionTypeCombo.DataSource = _sideMissionTypeList;
          _sideMissionTypeCombo.DisplayMember = "Value";
          _sideMissionTypeCombo.ValueMember = "Key";
-         _sideMissionTypeCombo.DataSource = _sideMissionTypeList;
          
          //Campaign mission types selected data
          _campaignMissionTypesList = new List<Mission.MissionType>();
@@ -108,19 +104,7 @@ namespace IACampaignLog
          _campaignMissionItemTiersCombo.DataSource = _campaignMissionItemTierList;
          
          _selectedCampaignMissions = new List<MissionHeader>();
-
-         //Reward type selected data
-         _rewardTypeList = new List<KeyValuePair<Reward.RewardType, string>>();
-         _rewardTypeList.Add(new KeyValuePair<Reward.RewardType, string>(Reward.RewardType.Regular, "Regular"));
-         _rewardTypeList.Add(new KeyValuePair<Reward.RewardType, string>(Reward.RewardType.Item, "Item"));
-         _rewardTypeList.Add(new KeyValuePair<Reward.RewardType, string>(Reward.RewardType.Ally, "Ally"));
-         _rewardTypeList.Add(new KeyValuePair<Reward.RewardType, string>(Reward.RewardType.Villain, "Villain"));
-         _rewardTypeList.Add(new KeyValuePair<Reward.RewardType, string>(Reward.RewardType.Bane, "Bane"));
-         _rewardTypeList.Add(new KeyValuePair<Reward.RewardType, string>(Reward.RewardType.Boon, "Boon"));
-         _rewardTypeCombo.DisplayMember = "Value";
-         _rewardTypeCombo.ValueMember = "Key";
-         _rewardTypeCombo.DataSource = _rewardTypeList;
-
+         
          //Update set combo boxes by refreshing the panels
          RefreshAgendaPanel(true);
          RefreshCampaignPanel(true);
@@ -130,7 +114,6 @@ namespace IACampaignLog
          RefreshRewardPanel(true);
          RefreshSideMissionPanel(true);
          RefreshStoryMissionPanel(true);
-         RefreshThreatMissionPanel(true);
          SelectedListItemIdChanged(-1);
          
          _addButton.Click += Handle_addButtonClick;
@@ -138,7 +121,7 @@ namespace IACampaignLog
          _cancelButton.Click += Handle_cancelButtonClick;
          _agendasListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
          _campaignListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
-         _campaignMissionListView.ItemSelectionChanged += Handle_campaignMissionsItemSelectionChanged;
+         _campaignMissionListView.ItemSelectionChanged += Handle_campaignMissionsItemSelectiongChanged;
          _classSetCombo.TextChanged += Handle_classSetComboSelectionChanged;
          _classSetCombo.SelectionChangeCommitted += Handle_classSetComboSelectionChanged;
          _charactersListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
@@ -147,7 +130,6 @@ namespace IACampaignLog
          _rewardsListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
          _sideMissionsListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
          _storyMissionsListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
-         _threatMissionListView.ItemSelectionChanged += Handle_ListViewItemSelectionChanged;
          _campaignAddMissionButton.Click += Handle_campaignAddMissionButtonClick;
          _campaignSaveMissionButton.Click += Handle_campaignSaveMissionButtonClick;
          _campaignCancelMissionButton.Click += Handle_campaignCancelMissionButtonClick;
@@ -160,7 +142,7 @@ namespace IACampaignLog
          if (selectedSet != null)
             _classCharacterCombo.SelectedItem = selectedSet.AssociatedCharacter;
       }
-      
+
       void Handle_campaignCancelMissionButtonClick (object sender, EventArgs e)
       {
          RefreshCampaignMissions(false);
@@ -188,7 +170,7 @@ namespace IACampaignLog
          RefreshCampaignMissions(true);
       }
       
-      void Handle_campaignMissionsItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+      void Handle_campaignMissionsItemSelectiongChanged(object sender, ListViewItemSelectionChangedEventArgs e)
       {
          if (sender is ListView)
          {
@@ -213,7 +195,7 @@ namespace IACampaignLog
             {
                ListViewItem lvi = (sender as ListView).SelectedItems[0];
                SelectedListItemIdChanged(int.Parse(lvi.Text));
-
+               
                if (sender == _agendasListView)
                {
                   Agenda selectedAgenda = AgendaController.GetInstance().FindAgendaWithId(_selectedListItemId);
@@ -229,7 +211,6 @@ namespace IACampaignLog
                   _nameText.Text = selectedCampaign.Name;
                   _campaignAllowForcedCheckBox.Checked = selectedCampaign.AllowForcedMissions;
                   _campaignAllowSidesCheckBox.Checked = selectedCampaign.AllowSideMissions;
-                  _campaignIncludeThreatCheckBox.Checked = selectedCampaign.IncludeThreatMissions;
                   _campaignStartingCreditsText.Value = selectedCampaign.StartingCredits;
                   _campaignStartingImpXpText.Value = selectedCampaign.StartingImperialXP;
                   _campaignStartingInfluenceText.Value = selectedCampaign.StartingInfluence;
@@ -249,7 +230,6 @@ namespace IACampaignLog
                   _nameText.Text = selectedClass.Name;
                   _classSetCombo.SelectedItem = (CardSet<ClassCard>)lvi.Tag;
                   _classXpText.Text = selectedClass.XpCost.ToString();
-                  _classCardIsItemCheckBox.Checked = selectedClass.IsItem;
                   _classCharacterCombo.SelectedItem = ((CardSet<ClassCard>)lvi.Tag).AssociatedCharacter;
                   _classSetCombo.Enabled = false;
                   _classCharacterCombo.Enabled = false;
@@ -265,7 +245,6 @@ namespace IACampaignLog
                {
                   Reward selectedReward = (Reward)lvi.Tag;
                   _nameText.Text = selectedReward.Name;
-                  _rewardTypeCombo.SelectedValue = selectedReward.RewardSubType;
                }
                else if (sender == _sideMissionsListView)
                {
@@ -278,12 +257,6 @@ namespace IACampaignLog
                   StoryMission selectedStory = (StoryMission)lvi.Tag;
                   _nameText.Text = selectedStory.Name;
                   _storyMissionCampaignCombo.SelectedItem = selectedStory.MissionCampaign;
-               }
-               else if (sender == _threatMissionListView)
-               {
-                  ThreatMission selectedThreatMission = (ThreatMission)lvi.Tag;
-                  _nameText.Text = selectedThreatMission.Name;
-                  _threatMissionBaneCombo.SelectedItem = selectedThreatMission.BaneReward;
                }
             }
          }
@@ -320,7 +293,6 @@ namespace IACampaignLog
             _rewardPanel.Visible = (Maintain)_maintainCombo.SelectedValue == Maintain.Reward;
             _sideMissionPanel.Visible = (Maintain)_maintainCombo.SelectedValue == Maintain.SideMission;
             _storyMissionPanel.Visible = (Maintain)_maintainCombo.SelectedValue == Maintain.StoryMission;
-            _threatMissionPanel.Visible = (Maintain)_maintainCombo.SelectedValue == Maintain.ThreatMission;
             _nameText.Text = string.Empty;
             SelectedListItemIdChanged(-1);
          }
@@ -387,7 +359,6 @@ namespace IACampaignLog
                   selected.StartingRebelXP = (int)_campaignStartingRebelXpText.Value;
                   selected.AllowSideMissions = _campaignAllowSidesCheckBox.Checked;
                   selected.AllowForcedMissions = _campaignAllowForcedCheckBox.Checked;
-                  selected.IncludeThreatMissions = _campaignIncludeThreatCheckBox.Checked;
                   _selectedCampaignMissions = new List<MissionHeader>();
                   RefreshCampaignPanel(true);
                   RefreshStoryMissionPanel(true);
@@ -433,14 +404,13 @@ namespace IACampaignLog
                      {
                         selectedSet = ClassController.GetInstance().AddSet(_classSetCombo.Text, (Character)_classCharacterCombo.SelectedItem);
                      }
-                     ClassController.GetInstance().AddClassCard(selectedSet, _nameText.Text, int.Parse(_classXpText.Text), _classCardIsItemCheckBox.Checked);
+                     ClassController.GetInstance().AddClassCard(selectedSet, _nameText.Text, int.Parse(_classXpText.Text));
                      MessageBox.Show("Class added successfully");
                   }
                   else
                   {
                      selected.Name = _nameText.Text;
                      selected.XpCost = int.Parse(_classXpText.Text);
-                     selected.IsItem = _classCardIsItemCheckBox.Checked;
                      ClassController.GetInstance().HasChanges = true;
                      MessageBox.Show("Class saved successfully");
                   }
@@ -481,18 +451,16 @@ namespace IACampaignLog
                {
                   if (selected == null)
                   {
-                     RewardController.GetInstance().AddReward(_nameText.Text, (Reward.RewardType)_rewardTypeCombo.SelectedValue);
+                     RewardController.GetInstance().AddReward(_nameText.Text);
                      MessageBox.Show("Reward added successfully");
                   }
                   else
                   {
                      selected.Name = _nameText.Text;
-                     selected.RewardSubType = (Reward.RewardType)_rewardTypeCombo.SelectedValue;
                      RewardController.GetInstance().HasChanges = true;
                      MessageBox.Show("Reward saved successfully");
                   }
                   RefreshRewardPanel(true);
-                  RefreshThreatMissionPanel(true);
                }
                break;
             }
@@ -543,29 +511,6 @@ namespace IACampaignLog
                }
                break;
             }
-         case Maintain.ThreatMission:
-            {
-               ThreatMission selected = (ThreatMission)SideMissionController.GetInstance().FindWithId(_selectedListItemId);
-               string existingName = selected == null ? string.Empty : selected.Name;
-               isValid = ValidateThreatMissionPanel(existingName);
-               if (isValid)
-               {
-                  if (selected == null)
-                  {
-                     SideMissionController.GetInstance().AddThreatMission(_nameText.Text, (Reward)_threatMissionBaneCombo.SelectedItem);
-                     MessageBox.Show("Threat Mission added successfully");
-                  }
-                  else
-                  {
-                     selected.Name = _nameText.Text;
-                     selected.BaneReward = (Reward)_threatMissionBaneCombo.SelectedItem;
-                     SideMissionController.GetInstance().HasChanges = true;
-                     MessageBox.Show("Threat Mission saved successfully");
-                  }
-                  RefreshThreatMissionPanel(true);
-               }
-            }
-            break;
          }
          
          return isValid;
@@ -581,7 +526,6 @@ namespace IACampaignLog
          RefreshRewardPanel(false);
          RefreshSideMissionPanel(false);
          RefreshStoryMissionPanel(false);
-         RefreshThreatMissionPanel(false);
          SelectedListItemIdChanged(-1);
       }
       
@@ -666,7 +610,6 @@ namespace IACampaignLog
          _nameText.Text = string.Empty;
          _campaignAllowForcedCheckBox.Checked = true;
          _campaignAllowSidesCheckBox.Checked = true;
-         _campaignIncludeThreatCheckBox.Checked = false;
          _campaignStartingCreditsText.Value = 0;
          _campaignStartingImpXpText.Value = 0;
          _campaignStartingInfluenceText.Value = 0;
@@ -684,7 +627,6 @@ namespace IACampaignLog
                                     c.Name,
                                     c.AllowSideMissions.ToString(),
                                     c.AllowForcedMissions.ToString(),
-                                    c.IncludeThreatMissions.ToString(),
                                     c.StartingRebelXP.ToString(),
                                     c.StartingCredits.ToString(),
                                     c.StartingImperialXP.ToString(),
@@ -726,7 +668,6 @@ namespace IACampaignLog
       {
          _nameText.Text = string.Empty;
          _classXpText.Text = string.Empty;
-         _classCardIsItemCheckBox.Checked = false;
          _classSetList = new List<CardSet<ClassCard>>(ClassController.GetInstance().ListOfT);
          _classSetCombo.Enabled = true;
          _classSetCombo.DataSource = null;
@@ -752,8 +693,7 @@ namespace IACampaignLog
                                        csc.Name,
                                        c.Name,
                                        c.XpCost.ToString(),
-                                       csc.AssociatedCharacter.Name,
-                                       c.IsItem ? "Y" : string.Empty});
+                                       csc.AssociatedCharacter.Name});
                   lvi.Tag = csc;
                   _classesListView.Items.Add(lvi);
                }
@@ -789,7 +729,6 @@ namespace IACampaignLog
       private void RefreshRewardPanel(bool reloadList)
       {
          _nameText.Text = string.Empty;
-         _rewardTypeCombo.SelectedIndex = 0;
          
          if (reloadList)
          {
@@ -798,47 +737,22 @@ namespace IACampaignLog
             {
                ListViewItem lvi = new ListViewItem(new string[]{
                                     r.Id.ToString(),
-                                    r.Name,
-                                    r.RewardSubType.ToString()});
+                                    r.Name});
                lvi.Tag = r;
                _rewardsListView.Items.Add(lvi);
             }
          }
          _rewardsListView.SelectedItems.Clear();
       }
-   
-   private void RefreshThreatMissionPanel(bool reloadList)
-   {
-      _nameText.Text = string.Empty;
-      _baneRewardList = new List<Reward>(RewardController.GetInstance().RewardsOfType(Reward.RewardType.Bane));
-      _threatMissionBaneCombo.ValueMember = "Id";
-      _threatMissionBaneCombo.DisplayMember = "Name";
-      _threatMissionBaneCombo.DataSource = _baneRewardList;
       
-      if (reloadList)
-      {
-         _threatMissionListView.Items.Clear();
-         foreach (ThreatMission sm in SideMissionController.GetInstance().ThreatMissions())
-         {
-            ListViewItem lvi = new ListViewItem(new string[]{
-                                    sm.Id.ToString(),
-                                    sm.Name,
-                                    sm.BaneReward.Name});
-            lvi.Tag = sm;
-            _threatMissionListView.Items.Add(lvi);
-         }
-      }
-      _threatMissionListView.SelectedItems.Clear();
-   }
-
-   private void RefreshSideMissionPanel(bool reloadList)
+      private void RefreshSideMissionPanel(bool reloadList)
       {
          _nameText.Text = string.Empty;
          
          if (reloadList)
          {
             _sideMissionsListView.Items.Clear();
-            foreach (SideMission sm in SideMissionController.GetInstance().SideMissionsNotOfType(SideMission.MissionType.Threat))
+            foreach (SideMission sm in SideMissionController.GetInstance().ListOfT)
             {
                ListViewItem lvi = new ListViewItem(new string[]{
                                     sm.Id.ToString(),
@@ -855,9 +769,9 @@ namespace IACampaignLog
       {
          _nameText.Text = string.Empty;
          _campaignList = new List<Campaign>(CampaignController.GetInstance().ListOfT);
+         _storyMissionCampaignCombo.DataSource = _campaignList;
          _storyMissionCampaignCombo.DisplayMember = "Name";
          _storyMissionCampaignCombo.ValueMember = "Id";
-         _storyMissionCampaignCombo.DataSource = _campaignList;
          
          
          if (reloadList)
@@ -1164,7 +1078,7 @@ namespace IACampaignLog
                {
                   //Side Mission exists
                   isValid = false;
-                  MessageBox.Show("Side/Threat Mission with name '" + _nameText.Text + "' exists");
+                  MessageBox.Show("Side Mission with name '" + _nameText.Text + "' exists");
                }
             }
          }
@@ -1190,33 +1104,7 @@ namespace IACampaignLog
          }
          return isValid;
       }
-
-      public bool ValidateThreatMissionPanel(string existingName)
-      {
-         bool isValid = false;
-         if (_threatMissionPanel.Visible)
-         {
-            isValid = ValidateNameTextbox();
-            if (isValid)
-            {
-               bool existing = SideMissionController.GetInstance().FindWithName(_nameText.Text).Count > 0;
-               if (existing && !_nameText.Text.ToLower().Equals(existingName.ToLower()))
-               {
-                  //Side Mission exists
-                  isValid = false;
-                  MessageBox.Show("Side/Threat Mission with name '" + _nameText.Text + "' exists");
-               }
-               if (isValid)
-               {
-                  isValid = _threatMissionBaneCombo.SelectedItem != null;
-                  if (!isValid)
-                     MessageBox.Show("Must select a Bane Reward");
-               }
-            }
-         }
-         return isValid;
-      }
-
+      
       public bool ValidateNameTextbox()
       {
          bool isValid = true;
