@@ -18,10 +18,11 @@ namespace IACampaignLog
       private Agenda _emptyAgenda;
       private ClassCard _emptyClassCard;
       private Reward _emptyReward;
-      public delegate bool ItemPurchasedEventHandler(PlayerPanel<T> sender, Item i, EventArgs e);
-      public event ItemPurchasedEventHandler ItemPurchased;
-      public delegate bool AgendaPurchasedEventHandler(PlayerPanel<T> sender, Agenda a, EventArgs e);
-      public event AgendaPurchasedEventHandler AgendaPurchased;
+      public delegate bool ItemEventHandler(object sender, Item i, EventArgs e);
+      public event ItemEventHandler ItemPurchased;
+      public event ItemEventHandler ItemSold;
+      public delegate bool AgendaEventHandler(object sender, Agenda a, EventArgs e);
+      public event AgendaEventHandler AgendaPurchased;
       
       public PlayerPanel ()
       {
@@ -29,14 +30,70 @@ namespace IACampaignLog
          this.Initialise();
          _emptyItem = new Item(-1, string.Empty, 0, Item.ItemTier.I);
          _emptyClassCard = new ClassCard(-1, string.Empty, 0);
-         _emptyReward = new Reward(-1, string.Empty);
+         _emptyReward = new Reward(-1, string.Empty, Reward.RewardType.Regular);
          _emptyAgenda = new Agenda(-1, string.Empty, 0, Agenda.AgendaType.SideMission);
          _addItemButton.Click += Handle_addItemButtonClick;
          _addClassCardButton.Click += Handle_addClassCardButtonClick;
          _addRewardButton.Click += Handle_addRewardButtonClick;
+         _classContextMenu.Opening += Handle_classContextMenu_Opening;
       }
 
-      void Handle_addRewardButtonClick (object sender, EventArgs e)
+      private void Handle_classContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+      {
+         ClassCard cc = _player.PurchasedClassCards.Where((x) => x.Id.Equals(int.Parse(_classCardListView.SelectedItems[0].Text))).SingleOrDefault();
+         if (cc == null || !cc.IsItem)
+            e.Cancel = true;
+      }
+
+      void AddNewItem()
+      {
+         Item i = (Item)_addItemCombo.SelectedItem;
+         if (i != _emptyItem)
+         {
+            if ((_player as HeroPlayer).PurchasedItems.Contains(i))
+               MessageBox.Show("Item has already been purchased");
+            else
+            {
+               if (ItemPurchased == null || ItemPurchased(this, i, EventArgs.Empty))
+               {
+                  (_player as HeroPlayer).PurchasedItems.Add(i);
+                  _addItemCombo.SelectedItem = _emptyItem;
+               }
+               else
+               {
+                  MessageBox.Show("Not enough credits to purchase selected item.\nCost $" + i.CreditCost);
+               }
+            }
+         }
+      }
+
+      void AddNewAgenda()
+      {
+         Agenda a = (Agenda)_addItemCombo.SelectedItem;
+         if (a != _emptyAgenda)
+         {
+            if ((_player as ImperialPlayer).PurchasedAgendas.Contains(a))
+               MessageBox.Show("Agenda already purchased");
+            else if ((_player as ImperialPlayer).Influence - a.InfluenceCost < 0)
+               MessageBox.Show("Not enough Influence to purchase selected Agenda.\nCost " + a.InfluenceCost + " Inf");
+            else
+            {
+               (_player as ImperialPlayer).PurchasedAgendas.Add(a);
+               if (AgendaPurchased != null && !AgendaPurchased(this, a, EventArgs.Empty))
+               {
+                  (_player as ImperialPlayer).PurchasedAgendas.Remove(a);
+                  MessageBox.Show("Cannot purchase selected Agenda");
+               }
+               else
+               {
+                  (_player as ImperialPlayer).Influence -= a.InfluenceCost;
+                  _addItemCombo.SelectedItem = _emptyAgenda;
+               }
+            }
+         }
+      }
+
+      void Handle_addRewardButtonClick(object sender, EventArgs e)
       {
          Reward r = (Reward)_addRewardCombo.SelectedItem;
          if (r != _emptyReward)
@@ -49,7 +106,7 @@ namespace IACampaignLog
                _addRewardCombo.SelectedItem = _emptyReward;
             }
          }
-         
+
          RefreshRewardListView();
       }
 
@@ -57,49 +114,11 @@ namespace IACampaignLog
       {
          if (_player.GetType() == typeof(HeroPlayer))
          {
-            Item i = (Item)_addItemCombo.SelectedItem;
-            if (i != _emptyItem)
-            {
-               if ((_player as HeroPlayer).PurchasedItems.Contains(i))
-                  MessageBox.Show("Item has already been purchased");
-               else
-               {
-                  if (ItemPurchased == null || ItemPurchased(this, i, EventArgs.Empty))
-                  {
-                     (_player as HeroPlayer).PurchasedItems.Add(i);
-                     _addItemCombo.SelectedItem = _emptyItem;
-                  }
-                  else
-                  {
-                     MessageBox.Show("Not enough credits to purchase selected item.\nCost $" + i.CreditCost);
-                  }
-               }
-            }
+            AddNewItem();
          }
          else if (_player.GetType() == typeof(ImperialPlayer))
          {
-            Agenda a = (Agenda)_addItemCombo.SelectedItem;
-            if (a != _emptyAgenda)
-            {
-               if ((_player as ImperialPlayer).PurchasedAgendas.Contains(a))
-                  MessageBox.Show("Agenda already purchased");
-               else if ((_player as ImperialPlayer).Influence - a.InfluenceCost < 0)
-                  MessageBox.Show("Not enough Influence to purchase selected Agenda.\nCost " + a.InfluenceCost + " Inf");
-               else
-               {
-                  (_player as ImperialPlayer).PurchasedAgendas.Add(a);
-                  if (AgendaPurchased != null && !AgendaPurchased(this, a, EventArgs.Empty))
-                  {
-                     (_player as ImperialPlayer).PurchasedAgendas.Remove(a);
-                     MessageBox.Show("Cannot purchase selected Agenda");
-                  }
-                  else
-                  {
-                     (_player as ImperialPlayer).Influence -= a.InfluenceCost;
-                     _addItemCombo.SelectedItem = _emptyAgenda;
-                  }
-               }
-            }
+            AddNewAgenda();
          }
          
          RefreshItemsAgendasListView();
@@ -179,14 +198,8 @@ namespace IACampaignLog
          _rewardListView.Items.Clear();
          foreach (Reward r in _player.Rewards)
          {
-            ListViewItem lvi = new ListViewItem(new string[]{r.Id.ToString(), r.Name});
+            ListViewItem lvi = new ListViewItem(new string[]{r.Id.ToString(), r.Name, r.RewardSubType.ToString()});
             _rewardListView.Items.Add(lvi);
-         }
-         
-         if (_rewardListView.Items.Count > 0)
-         {
-            _rewardListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
-            _rewardListView.Columns[0].Width = 0;
          }
       }
       
@@ -220,8 +233,8 @@ namespace IACampaignLog
             _itemsList = new List<Item>(ItemController.GetInstance().ListOfT);
             _itemsList.Insert(0, _emptyItem);
             _addItemCombo.DataSource = _itemsList;
-            (_player as HeroPlayer).ItemTraded += HandleItemTrade;
             _addItemCombo.DisplayMember = "NameWithTier";
+            (_player as HeroPlayer).ItemTraded += HandleItemTrade;
          }
          else if (_player is ImperialPlayer)
          {
@@ -233,6 +246,7 @@ namespace IACampaignLog
             _agendaList.Insert(0, _emptyAgenda);
             _addItemCombo.DataSource = _agendaList;
             _addItemCombo.DisplayMember = "Name";
+            (_player as ImperialPlayer).AgendaDiscarded += HandleDiscardAgenda;
          }
          _addItemCombo.ValueMember = "Id";
          
@@ -251,24 +265,29 @@ namespace IACampaignLog
          _addRewardCombo.DataSource = _rewardsList;
          _addRewardCombo.DisplayMember = "Name";
          _addRewardCombo.ValueMember = "Id";
-         
+
          //Set up item trading menu items
          if (heroes != null)
          {
             _otherPlayers = heroes.Where((x) => x != _player).ToList();
             foreach (HeroPlayer h in _otherPlayers)
             {
-               MenuItem m = new MenuItem(h.PlayerCharacter.Name, HandleItemTrade);
+               ToolStripMenuItem m = new ToolStripMenuItem(h.PlayerCharacter.Name, null, HandleItemTrade);
                m.Tag = h;
-               _tradeMenuItem.MenuItems.Add(m);
+               _tradeItemMenuItem.DropDownItems.Add(m);
             }
-            _itemListView.ContextMenu = _tradeItemContextMenu;
+            _itemListView.ContextMenuStrip = _itemContextMenu;
+         }
+         else
+         {
+            _itemListView.ContextMenuStrip = _agendaContextMenu;
          }
          
          //populate item list
          RefreshItemsAgendasListView();
-         
+
          //populate class card list
+         _classCardListView.ContextMenuStrip = _classContextMenu;
          RefreshClassCardListView();
          
          //populate reward list
@@ -277,15 +296,15 @@ namespace IACampaignLog
       
       void HandleItemTrade(object sender, EventArgs e)
       {
-         if (sender is MenuItem && ((MenuItem)sender).Tag is HeroPlayer && _itemListView.SelectedItems.Count > 0)
+         if (sender is ToolStripMenuItem && (sender as ToolStripMenuItem).Tag is HeroPlayer && _itemListView.SelectedItems.Count > 0)
          {
             Item tradeMe = (_player as HeroPlayer).PurchasedItems.Where((x) => x.Id.Equals(int.Parse(_itemListView.SelectedItems[0].Text))).SingleOrDefault();
             if (tradeMe != null)
             {
-               ((HeroPlayer)((MenuItem)sender).Tag).PurchasedItems.Add(tradeMe);
+               ((HeroPlayer)(sender as ToolStripMenuItem).Tag).PurchasedItems.Add(tradeMe);
                (_player as HeroPlayer).PurchasedItems.Remove(tradeMe);
                RefreshItemsAgendasListView();
-               ((HeroPlayer)((MenuItem)sender).Tag).RaiseItemTradedEvent(this);
+               ((HeroPlayer)(sender as ToolStripMenuItem).Tag).RaiseItemTradedEvent(this);
             }
          }
          RefreshItemsAgendasListView();
@@ -300,7 +319,56 @@ namespace IACampaignLog
       {
          UpdateXP();
       }
-      
+
+      void HandleSellItem(object sender, EventArgs e)
+      {
+         if (_itemListView.SelectedItems.Count > 0)
+         {
+            Item sellMe = (_player as HeroPlayer).PurchasedItems.Where((x) => x.Id.Equals(int.Parse(_itemListView.SelectedItems[0].Text))).SingleOrDefault();
+            if (sellMe != null && MessageBox.Show(String.Format("Sell item for ${0}?", sellMe.CreditCost / 2), "Sell Item", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+               (_player as HeroPlayer).PurchasedItems.Remove(sellMe);
+               RefreshItemsAgendasListView();
+               RaiseItemSoldEvent(this, sellMe);
+            }
+         }
+      }
+
+      void HandleSellClassItem(object sender, EventArgs e)
+      {
+         if (_classCardListView.SelectedItems.Count > 0)
+         {
+            ClassCard sellMe = _player.PurchasedClassCards.Where((x) => x.Id.Equals(int.Parse(_classCardListView.SelectedItems[0].Text))).FirstOrDefault();
+            if (sellMe != null && MessageBox.Show("Sell item for $50?", "Sell Class Item", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+               _player.PurchasedClassCards.Remove(sellMe);
+               RefreshClassCardListView();
+               RaiseItemSoldEvent(this, new Item(-1, "Class Item", 100, Item.ItemTier.I));
+            }
+         }
+      }
+
+      void RaiseItemSoldEvent(object sender, Item i)
+      {
+         if (this.ItemSold != null)
+            ItemSold(sender, i, EventArgs.Empty);
+      }
+
+      void HandleDiscardAgenda(object sender, EventArgs e)
+      {
+         if (_itemListView.SelectedItems.Count > 0)
+         {
+            Agenda discardMe = (_player as ImperialPlayer).PurchasedAgendas.Where((x) => x.Id.Equals(int.Parse(_itemListView.SelectedItems[0].Text))).SingleOrDefault();
+            if (discardMe != null)
+            {
+               (_player as ImperialPlayer).PurchasedAgendas.Remove(discardMe);
+               RefreshItemsAgendasListView();
+               (_player as ImperialPlayer).RaiseAgendaDiscardedEvent(this);
+            }
+         }
+         RefreshItemsAgendasListView();
+      }
+
       public void UpdateXP()
       {
          _xpLabel.Text = _player.Xp.ToString() + " XP";

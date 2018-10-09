@@ -36,7 +36,14 @@ namespace IACampaignLog
                  where c.Name.ToLower().Equals(name.ToLower())
                  select c).ToList();
       }
-      
+
+      public IList<T> FindWithNameContaining(string inName)
+      {
+         return (from T c in this.ListOfT
+                 where c.Name.ToLower().Contains(inName.ToLower())
+                 select c).ToList();
+      }
+
       protected T AddT(Func<int, T> constructT)
       {
          int newId = 0;

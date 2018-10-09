@@ -9,7 +9,9 @@ namespace IACampaignLog
    {
       private Form _gameDetailsForm;
       private Game _currentGame;
-      
+      private PlayerPanel<ImperialPlayer> _impPlayerControl;
+
+
       public ViewGameForm () : base()
       {
          _currentGame = null;
@@ -76,15 +78,23 @@ namespace IACampaignLog
             throw new InvalidOperationException("Must load game before loading missions");
          
          IList<string> storyMissions = new List<string>(StoryMissionController.GetInstance().StoryMissionsForCampaign(_currentGame.GameCampaign.Id).Select((x) => x.Name));
-         IList<string> sideMissions = new List<string>(_currentGame.ImpPlayer.PurchasedAgendas.Where((x) => x.AgendaCardType == Agenda.AgendaType.SideMission).Select((x) => x.Name).Union(_currentGame.SelectedSideMissions.Select((x) => x.Name)));
+         IList<string> sideMissions = new List<string>(_currentGame.ImpPlayer.PurchasedAgendas.Where((x) => x.AgendaCardType == Agenda.AgendaType.SideMission).Select((x) => x.Name).Union(_currentGame.SelectedSideMissions.Where((x) => x.SideMissionType != SideMission.MissionType.Threat).Select((x) => x.Name)));
          IList<string> forcedMissions = new List<string>(_currentGame.ImpPlayer.PurchasedAgendas.Where((x) => x.AgendaCardType == Agenda.AgendaType.ForcedMission).Select((x) => x.Name).Union(SideMissionController.GetInstance().SideMissionsOfType(SideMission.MissionType.Forced).Select((x) => x.Name)));
+         IList<ThreatMission> threatMissions = _currentGame.SelectedSideMissions.Where((x) => x is ThreatMission).Select((x) => (ThreatMission)x).ToList();
          
          storyMissions.Insert(0, string.Empty);
          sideMissions.Insert(0, string.Empty);
+         threatMissions.Insert(0, new ThreatMission(-1, string.Empty, null));
          
          _availableSide1Combo.DataSource = sideMissions.ToList();
          _availableSide2Combo.DataSource = sideMissions.ToList();
-         
+         _availableThreatMission1Combo.DataSource = threatMissions.ToList();
+         _availableThreatMission1Combo.DisplayMember = "Name";
+         _availableThreatMission1Combo.ValueMember = "Id";
+         _availableThreatMission2Combo.DataSource = threatMissions.ToList();
+         _availableThreatMission2Combo.DisplayMember = "Name";
+         _availableThreatMission2Combo.ValueMember = "Id";
+
          if (_currentGame.AvailableSideMission1 != null)
             _availableSide1Combo.SelectedItem = _currentGame.AvailableSideMission1;
          else
@@ -94,10 +104,22 @@ namespace IACampaignLog
             _availableSide2Combo.SelectedItem = _currentGame.AvailableSideMission2;
          else
             _availableSide2Combo.SelectedIndex = 0;
-         
+
+         if (_currentGame.AvailableThreatMission1 != null)
+            _availableThreatMission1Combo.SelectedItem = _currentGame.AvailableThreatMission1;
+         else
+            _availableThreatMission1Combo.SelectedIndex = 0;
+
+         if (_currentGame.AvailableThreatMission2 != null)
+            _availableThreatMission2Combo.SelectedItem = _currentGame.AvailableThreatMission2;
+         else
+            _availableThreatMission2Combo.SelectedIndex = 0;
+
          _availableSide1Combo.SelectedValueChanged += Handle_availableSide1ComboSelectedValueChanged;
          _availableSide2Combo.SelectedValueChanged += Handle_availableSide2ComboSelectedValueChanged;
-         
+         _availableThreatMission1Combo.SelectedValueChanged += Handle_availableThreatMission1ComboValueChanged;
+         _availableThreatMission2Combo.SelectedValueChanged += Handle_availableThreatMission2ComboValueChanged;
+
          _missionListPanel.Controls.Clear();
          int ypos = 5;
          foreach (Mission m in _currentGame.Missions)
@@ -109,7 +131,7 @@ namespace IACampaignLog
                   missionControl = new MissionPanel(storyMissions);
                   break;
             case Mission.MissionType.Side:
-                  missionControl = new MissionPanel(sideMissions);
+                  missionControl = new MissionPanel(sideMissions.Union(threatMissions.Where((x) => x.Id >= 0).Select((x) => x.Name)).ToList());
                   break;
             case Mission.MissionType.Forced:
                   missionControl = new MissionPanel(forcedMissions);
@@ -133,7 +155,36 @@ namespace IACampaignLog
       {
          _currentGame.AvailableSideMission1 = _availableSide1Combo.SelectedValue.ToString();
       }
-      
+
+      void Handle_availableThreatMission1ComboValueChanged(object sender, EventArgs e)
+      {
+         _currentGame.AvailableThreatMission1 = (ThreatMission)_availableThreatMission1Combo.SelectedItem;
+         UpdateBaneRewards();
+      }
+
+      void Handle_availableThreatMission2ComboValueChanged(object sender, EventArgs e)
+      {
+         _currentGame.AvailableThreatMission2 = (ThreatMission)_availableThreatMission2Combo.SelectedItem;
+         UpdateBaneRewards();
+      }
+
+      private void UpdateBaneRewards()
+      {
+         IList<Reward> banes = _currentGame.ImpPlayer.Rewards.Where((x) => x.RewardSubType == Reward.RewardType.Bane).ToList();
+         foreach (Reward b in banes)
+         {
+            if ((_currentGame.AvailableThreatMission1 == null || b != _currentGame.AvailableThreatMission1.BaneReward)
+            && (_currentGame.AvailableThreatMission2 == null || b != _currentGame.AvailableThreatMission2.BaneReward))
+               _currentGame.ImpPlayer.Rewards.Remove(b);
+         }
+         if (_currentGame.AvailableThreatMission1 != null && _currentGame.AvailableThreatMission1.Id >= 0 && !banes.Contains(_currentGame.AvailableThreatMission1.BaneReward))
+            _currentGame.ImpPlayer.Rewards.Add(_currentGame.AvailableThreatMission1.BaneReward);
+         if (_currentGame.AvailableThreatMission2 != null && _currentGame.AvailableThreatMission2.Id >= 0 && !banes.Contains(_currentGame.AvailableThreatMission2.BaneReward))
+            _currentGame.ImpPlayer.Rewards.Add(_currentGame.AvailableThreatMission2.BaneReward);
+
+         _impPlayerControl.RefreshRewardListView();
+      }
+
       public void LoadGame(Game gameToView)
       {
          if (gameToView == null)
@@ -141,18 +192,26 @@ namespace IACampaignLog
          
          _currentGame = gameToView;
          this.Text = "Game - " + _currentGame.Id + " - " + _currentGame.GameDate.ToShortDateString();
+         _availableThreatsLabel.Visible = _availableThreatMission1Combo.Visible = 
+            _availableThreatMission2Combo.Visible = _currentGame.GameCampaign.IncludeThreatMissions;
+         if (!_currentGame.GameCampaign.IncludeThreatMissions)
+         {
+            _availableSidesLabel.Top += 10;
+            _availableSide1Combo.Top += 10;
+            _availableSide2Combo.Top += 10;
+         }
          
          //Load missions
          LoadMissions();
          
          //Load players
          int ypos = 5;
-         PlayerPanel<ImperialPlayer> impPlayerControl = new PlayerPanel<ImperialPlayer>();
-         impPlayerControl.Location = new System.Drawing.Point(0, ypos);
-         _playerListPanel.Controls.Add(impPlayerControl);
-         impPlayerControl.LoadImperialPlayer(_currentGame.ImpPlayer, _currentGame.SelectedAgendaSets);
-         impPlayerControl.AgendaPurchased += HandleImpPlayerControlAgendaPurchased;
-         ypos = impPlayerControl.Location.Y + impPlayerControl.Height + 5;
+         _impPlayerControl = new PlayerPanel<ImperialPlayer>();
+         _impPlayerControl.Location = new System.Drawing.Point(0, ypos);
+         _playerListPanel.Controls.Add(_impPlayerControl);
+         _impPlayerControl.LoadImperialPlayer(_currentGame.ImpPlayer, _currentGame.SelectedAgendaSets);
+         _impPlayerControl.AgendaPurchased += HandleImpPlayerControlAgendaPurchased;
+         ypos = _impPlayerControl.Location.Y + _impPlayerControl.Height + 5;
          
          foreach (HeroPlayer h in _currentGame.Heroes)
          {
@@ -161,6 +220,7 @@ namespace IACampaignLog
             _playerListPanel.Controls.Add(playerControl);
             playerControl.LoadHeroPlayer(h, _currentGame.Heroes);
             playerControl.ItemPurchased += HandlePlayerControlItemPurchased;
+            playerControl.ItemSold += HandlePlayerControlItemSold;
             ypos = playerControl.Location.Y + playerControl.Height + 5;
          }
          
@@ -168,7 +228,7 @@ namespace IACampaignLog
          UpdateHeroCreditsPoolLabel();
       }
 
-      bool HandleImpPlayerControlAgendaPurchased (PlayerPanel<ImperialPlayer> sender, Agenda a, EventArgs e)
+      bool HandleImpPlayerControlAgendaPurchased (object sender, Agenda a, EventArgs e)
       {
          bool allowed = a.AgendaCardType == Agenda.AgendaType.Secret || a.AgendaCardType == Agenda.AgendaType.Ongoing;
          if (!allowed)
@@ -179,7 +239,10 @@ namespace IACampaignLog
                allowed = true;
             }
             else if (_currentGame.GameCampaign.AllowSideMissions && a.AgendaCardType == Agenda.AgendaType.SideMission)
+            {
+               LoadMissions();
                allowed = true;
+            }
          }
          
          return allowed;
@@ -190,11 +253,22 @@ namespace IACampaignLog
          UpdateHeroCreditsPoolLabel();
       }
 
-      bool HandlePlayerControlItemPurchased (PlayerPanel<HeroPlayer> sender, Item i, EventArgs e)
+      bool HandlePlayerControlItemPurchased (object sender, Item i, EventArgs e)
       {
          if (_currentGame.HeroCreditsPool - i.CreditCost >= 0)
          {
             _currentGame.HeroCreditsPool -= i.CreditCost;
+            return true;
+         }
+         else
+            return false;
+      }
+
+      bool HandlePlayerControlItemSold(object sender, Item i, EventArgs e)
+      {
+         if (i != null)
+         {
+            _currentGame.HeroCreditsPool += (i.CreditCost / 2);
             return true;
          }
          else
