@@ -8,26 +8,27 @@ namespace IACampaignLog
    {
       private Panel _mainControlsPanel, _agendaPanel, _characterPanel, _classPanel,
                     _itemPanel, _rewardPanel, _sideMissionPanel, _storyMissionPanel,
-                    _campaignPanel;
+                    _campaignPanel, _threatMissionPanel;
       private ComboBox _maintainCombo, _agendaSetCombo, _classSetCombo, _agendaTypeCombo,
                        _itemTierComboBox, _classCharacterCombo, _storyMissionCampaignCombo,
-                       _sideMissionTypeCombo, _characterSideMissionCombo, 
+                       _sideMissionTypeCombo, _threatMissionBaneCombo, _characterSideMissionCombo, 
                        _campaignMissionTypeCombo, _campaignMissionNameCombo,
-                       _campaignMissionItemTiersCombo;
+                       _campaignMissionItemTiersCombo, _rewardTypeCombo;
       private TextBox _nameText, _agendaInfluenceText, _itemCreditText, _classXpText;
       private Button _addButton, _saveButton, _cancelButton, _campaignAddMissionButton,
                      _campaignSaveMissionButton, _campaignCancelMissionButton;
       private Label _agendaSetLabel, _nameLabel, _agendaInfluenceLabel, _classSetLabel,
                     _classXpLabel, _itemCreditLabel, _itemTierLabel, _storyMissionCampaignLabel,
-                    _sideMissionColourLabel, _characterSideMissionLabel,
+                    _sideMissionColourLabel, _characterSideMissionLabel, _threatMissionBaneLabel,
                     _campaignStartingRebelXPLabel, _campaignStartingImpXPLabel,
                     _campaignStartingInfluenceLabel, _campaignStartingCreditsLabel,
-                    _campaignMissionNameLabel, _campaignMissionTypeLabel,
+                    _campaignMissionNameLabel, _campaignMissionTypeLabel, _rewardTypeLabel,
                     _campaignMissionThreatLevelLabel, _campaignMissionItemTiersLabel;
       private ListView _agendasListView, _charactersListView, _classesListView, 
-                     _itemsListView, _rewardsListView, _sideMissionsListView,
+                     _itemsListView, _rewardsListView, _sideMissionsListView, _threatMissionListView,
                      _storyMissionsListView, _campaignListView, _campaignMissionListView;
-      private CheckBox _campaignAllowSidesCheckBox, _campaignAllowForcedCheckBox;
+      private CheckBox _campaignAllowSidesCheckBox, _campaignAllowForcedCheckBox, _campaignIncludeThreatCheckBox,
+                     _classCardIsItemCheckBox;
       private GroupBox _campaignMissionsGroupBox;
       private NumericUpDown _campaignStartingRebelXpText, _campaignStartingImpXpText,
                             _campaignStartingCreditsText, _campaignStartingInfluenceText,
@@ -145,6 +146,13 @@ namespace IACampaignLog
          _campaignAllowForcedCheckBox.Text = "Allow Forced Missions";
          _campaignAllowForcedCheckBox.Checked = true;
          _campaignPanel.Controls.Add(_campaignAllowForcedCheckBox);
+         //Campaign allow threat missions check box
+         _campaignIncludeThreatCheckBox = new CheckBox();
+         _campaignIncludeThreatCheckBox.Size = new System.Drawing.Size(150, 25);
+         _campaignIncludeThreatCheckBox.Location = new System.Drawing.Point(320, 90);
+         _campaignIncludeThreatCheckBox.Text = "Include Threat Missions";
+         _campaignIncludeThreatCheckBox.Checked = false;
+         _campaignPanel.Controls.Add(_campaignIncludeThreatCheckBox);
          //Campaign starting rebel xp label
          _campaignStartingRebelXPLabel = new Label();
          _campaignStartingRebelXPLabel.Text = "Starting Rebel XP";
@@ -291,8 +299,9 @@ namespace IACampaignLog
          _campaignListView.View = View.Details;
          _campaignListView.Columns.Add("Id");
          _campaignListView.Columns.Add("Name");
-         _campaignListView.Columns.Add("Allow SM");
-         _campaignListView.Columns.Add("Allow FM");
+         _campaignListView.Columns.Add("SM");
+         _campaignListView.Columns.Add("FM");
+         _campaignListView.Columns.Add("TM");
          _campaignListView.Columns.Add("Reb XP");
          _campaignListView.Columns.Add("Cred's");
          _campaignListView.Columns.Add("Imp XP");
@@ -300,11 +309,14 @@ namespace IACampaignLog
          _campaignListView.Columns.Add("# M's");
          _campaignListView.Columns[0].Width = 0;
          _campaignListView.Columns[1].Width += 40;
-         _campaignListView.Columns[4].Width -= 10;
+         _campaignListView.Columns[2].Width -= 20;
+         _campaignListView.Columns[3].Width -= 20;
+         _campaignListView.Columns[4].Width -= 20;
          _campaignListView.Columns[5].Width -= 10;
          _campaignListView.Columns[6].Width -= 10;
          _campaignListView.Columns[7].Width -= 10;
-         _campaignListView.Columns[8].Width -= 10;
+         _campaignListView.Columns[8].Width -= 20;
+         _campaignListView.Columns[9].Width -= 20;
          _campaignPanel.Controls.Add(_campaignListView);
          
          //Character panel
@@ -370,6 +382,13 @@ namespace IACampaignLog
          _classXpText.Size = new System.Drawing.Size(250, 30);
          _classXpText.Location = new System.Drawing.Point(5, 165);
          _classPanel.Controls.Add(_classXpText);
+         //Class card is Item check box
+         _classCardIsItemCheckBox = new CheckBox();
+         _classCardIsItemCheckBox.Size = new System.Drawing.Size(250, 30);
+         _classCardIsItemCheckBox.Location = new System.Drawing.Point(260, 165);
+         _classCardIsItemCheckBox.Checked = false;
+         _classCardIsItemCheckBox.Text = "Is Item";
+         _classPanel.Controls.Add(_classCardIsItemCheckBox);
          //Class list view
          _classesListView = new ListView();
          _classesListView.Size = new System.Drawing.Size(470, 200);
@@ -382,11 +401,13 @@ namespace IACampaignLog
          _classesListView.Columns.Add("Name");
          _classesListView.Columns.Add("XP");
          _classesListView.Columns.Add("Character");
+         _classesListView.Columns.Add("Item");
          _classesListView.Columns[0].Width = 0;
-         _classesListView.Columns[1].Width += 95;
-         _classesListView.Columns[2].Width += 95;
-         _classesListView.Columns[3].Width -= 25;
+         _classesListView.Columns[1].Width += 85;
+         _classesListView.Columns[2].Width += 80;
+         _classesListView.Columns[3].Width -= 32;
          _classesListView.Columns[4].Width += 40;
+         _classesListView.Columns[5].Width -= 27;
          _classPanel.Controls.Add(_classesListView);
          
          //Item panel
@@ -435,6 +456,18 @@ namespace IACampaignLog
          _rewardPanel = new Panel();
          _rewardPanel.Visible = false;
          _rewardPanel.Dock = DockStyle.Fill;
+         //Reward Type Label
+         _rewardTypeLabel = new Label();
+         _rewardTypeLabel.Text = "Reward Type";
+         _rewardTypeLabel.Size = new System.Drawing.Size(250, 20);
+         _rewardTypeLabel.Location = new System.Drawing.Point(5, 90);
+         _rewardPanel.Controls.Add(_rewardTypeLabel);
+         //Reward Type Combo
+         _rewardTypeCombo = new ComboBox();
+         _rewardTypeCombo.Size = new System.Drawing.Size(200, 30);
+         _rewardTypeCombo.Location = new System.Drawing.Point(5, 110);
+         _rewardTypeCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+         _rewardPanel.Controls.Add(_rewardTypeCombo);
          //Rewards list view
          _rewardsListView = new ListView();
          _rewardsListView.Size = new System.Drawing.Size(470, 250);
@@ -444,15 +477,17 @@ namespace IACampaignLog
          _rewardsListView.View = View.Details;
          _rewardsListView.Columns.Add("Id");
          _rewardsListView.Columns.Add("Name");
+         _rewardsListView.Columns.Add("Type");
          _rewardsListView.Columns[0].Width = 0;
          _rewardsListView.Columns[1].Width += 200;
+         _rewardsListView.Columns[1].Width += 20;
          _rewardPanel.Controls.Add(_rewardsListView);
          
          //Side mission panel
          _sideMissionPanel = new Panel();
          _sideMissionPanel.Visible = false;
          _sideMissionPanel.Dock = DockStyle.Fill;
-         //campaign label
+         //Side mission colour label
          _sideMissionColourLabel = new Label();
          _sideMissionColourLabel.Text = "Mission Type";
          _sideMissionColourLabel.Size = new System.Drawing.Size(250, 20);
@@ -478,7 +513,38 @@ namespace IACampaignLog
          _sideMissionsListView.Columns[1].Width += 100;
          _sideMissionsListView.Columns[2].Width += 100;
          _sideMissionPanel.Controls.Add(_sideMissionsListView);
-         
+
+         //Threat mission panel
+         _threatMissionPanel = new Panel();
+         _threatMissionPanel.Visible = false;
+         _threatMissionPanel.Dock = DockStyle.Fill;
+         //Threat mission bane label
+         _threatMissionBaneLabel = new Label();
+         _threatMissionBaneLabel.Text = "Bane Reward";
+         _threatMissionBaneLabel.Size = new System.Drawing.Size(250, 20);
+         _threatMissionBaneLabel.Location = new System.Drawing.Point(5, 90);
+         _threatMissionPanel.Controls.Add(_threatMissionBaneLabel);
+         //Threat mission bane reward combo
+         _threatMissionBaneCombo = new ComboBox();
+         _threatMissionBaneCombo.Size = new System.Drawing.Size(200, 30);
+         _threatMissionBaneCombo.Location = new System.Drawing.Point(5, 110);
+         _threatMissionBaneCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+         _threatMissionPanel.Controls.Add(_threatMissionBaneCombo);
+         //Threat missions list view
+         _threatMissionListView = new ListView();
+         _threatMissionListView.Size = new System.Drawing.Size(470, 250);
+         _threatMissionListView.Location = new System.Drawing.Point(5, 150);
+         _threatMissionListView.FullRowSelect = true;
+         _threatMissionListView.MultiSelect = false;
+         _threatMissionListView.View = View.Details;
+         _threatMissionListView.Columns.Add("Id");
+         _threatMissionListView.Columns.Add("Name");
+         _threatMissionListView.Columns.Add("Bane");
+         _threatMissionListView.Columns[0].Width = 0;
+         _threatMissionListView.Columns[1].Width += 100;
+         _threatMissionListView.Columns[2].Width += 100;
+         _threatMissionPanel.Controls.Add(_threatMissionListView);
+
          //story mission panel
          _storyMissionPanel = new Panel();
          _storyMissionPanel.Visible = false;
@@ -512,7 +578,7 @@ namespace IACampaignLog
          
          this.Controls.Add(_mainControlsPanel);
          this.Controls.AddRange(new Control[] {_agendaPanel, _campaignPanel, _characterPanel, _classPanel, 
-                                _itemPanel, _rewardPanel, _sideMissionPanel, _storyMissionPanel});
+                                _itemPanel, _rewardPanel, _sideMissionPanel, _storyMissionPanel, _threatMissionPanel});
          
       }
    }

@@ -8,8 +8,9 @@ namespace IACampaignLog
       private Button _showGameDetailsButton, _applyMissionChangesButton,
          _cancelMissionChangesButton, _addForcedMissionButton;
       private Panel _missionListPanel, _topControlsPanel, _playerListPanel;
-      private Label _heroCreditsLabel, _availableSidesLabel;
-      private ComboBox _availableSide1Combo, _availableSide2Combo;
+      private Label _heroCreditsLabel, _availableSidesLabel, _availableThreatsLabel;
+      private ComboBox _availableSide1Combo, _availableSide2Combo, _availableThreatMission1Combo,
+         _availableThreatMission2Combo;
       
       private void Initialise()
       {
@@ -55,23 +56,41 @@ namespace IACampaignLog
          _topControlsPanel.Controls.Add(_heroCreditsLabel);
          //available sides label
          _availableSidesLabel = new Label();
-         _availableSidesLabel.Size = new System.Drawing.Size(125, 25);
-         _availableSidesLabel.Location = new System.Drawing.Point(580, 10);
+         _availableSidesLabel.Size = new System.Drawing.Size(125, 20);
+         _availableSidesLabel.Location = new System.Drawing.Point(580, 5);
          _availableSidesLabel.Text = "Available Side Missions";
          _topControlsPanel.Controls.Add(_availableSidesLabel);
          //Available side mission 1 combo
          _availableSide1Combo = new ComboBox();
          _availableSide1Combo.Size = new System.Drawing.Size(200, 30);
-         _availableSide1Combo.Location = new System.Drawing.Point(710, 10);
+         _availableSide1Combo.Location = new System.Drawing.Point(720, 0);
          _availableSide1Combo.DropDownStyle = ComboBoxStyle.DropDownList;
          _topControlsPanel.Controls.Add(_availableSide1Combo);
          //Available side mission 2 combo
          _availableSide2Combo = new ComboBox();
          _availableSide2Combo.Size = new System.Drawing.Size(200, 30);
-         _availableSide2Combo.Location = new System.Drawing.Point(920, 10);
+         _availableSide2Combo.Location = new System.Drawing.Point(930, 0);
          _availableSide2Combo.DropDownStyle = ComboBoxStyle.DropDownList;
          _topControlsPanel.Controls.Add(_availableSide2Combo);
-         
+         //available threats label
+         _availableThreatsLabel = new Label();
+         _availableThreatsLabel.Size = new System.Drawing.Size(140, 25);
+         _availableThreatsLabel.Location = new System.Drawing.Point(580, 25);
+         _availableThreatsLabel.Text = "Available Threat Missions";
+         _topControlsPanel.Controls.Add(_availableThreatsLabel);
+         //Available threat mission 1 combo
+         _availableThreatMission1Combo = new ComboBox();
+         _availableThreatMission1Combo.Size = new System.Drawing.Size(200, 30);
+         _availableThreatMission1Combo.Location = new System.Drawing.Point(720, 20);
+         _availableThreatMission1Combo.DropDownStyle = ComboBoxStyle.DropDownList;
+         _topControlsPanel.Controls.Add(_availableThreatMission1Combo);
+         //Available threat mission 2 combo
+         _availableThreatMission2Combo = new ComboBox();
+         _availableThreatMission2Combo.Size = new System.Drawing.Size(200, 30);
+         _availableThreatMission2Combo.Location = new System.Drawing.Point(930, 20);
+         _availableThreatMission2Combo.DropDownStyle = ComboBoxStyle.DropDownList;
+         _topControlsPanel.Controls.Add(_availableThreatMission2Combo);
+
          //Mission list panel
          _missionListPanel = new Panel();
          _missionListPanel.Location = new System.Drawing.Point(0, 40);
