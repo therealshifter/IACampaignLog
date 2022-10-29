@@ -23,6 +23,7 @@ namespace IACampaignLog
       public event ItemEventHandler ItemSold;
       public delegate bool AgendaEventHandler(object sender, Agenda a, EventArgs e);
       public event AgendaEventHandler AgendaPurchased;
+      public event AgendaEventHandler AgendaDiscarded;
       
       public PlayerPanel ()
       {
@@ -31,20 +32,30 @@ namespace IACampaignLog
          _emptyItem = new Item(-1, string.Empty, 0, Item.ItemTier.I);
          _emptyClassCard = new ClassCard(-1, string.Empty, 0);
          _emptyReward = new Reward(-1, string.Empty, Reward.RewardType.Regular);
-         _emptyAgenda = new Agenda(-1, string.Empty, 0, Agenda.AgendaType.SideMission);
+         _emptyAgenda = new Agenda(-1, string.Empty, 0, Agenda.AgendaType.SideMission, 0);
          _addItemButton.Click += Handle_addItemButtonClick;
          _addClassCardButton.Click += Handle_addClassCardButtonClick;
          _addRewardButton.Click += Handle_addRewardButtonClick;
          _classContextMenu.Opening += Handle_classContextMenu_Opening;
+         _agendaContextMenu.Opening += Handle_agendaItemContextMenu_Opening;
+         _itemContextMenu.Opening += Handle_agendaItemContextMenu_Opening;
       }
 
       private void Handle_classContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
       {
-         ClassCard cc = _player.PurchasedClassCards.Where((x) => x.Id.Equals(int.Parse(_classCardListView.SelectedItems[0].Text))).SingleOrDefault();
+         ClassCard cc = null;
+         if (_classCardListView.SelectedItems.Count == 1)
+            cc = _player.PurchasedClassCards.Where((x) => x.Id.Equals(int.Parse(_classCardListView.SelectedItems[0].Text))).SingleOrDefault();
          if (cc == null || !cc.IsItem)
             e.Cancel = true;
       }
-
+      
+      private void Handle_agendaItemContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+      {
+         if (_itemListView.SelectedItems.Count <= 0)
+            e.Cancel = true;
+      }
+      
       void AddNewItem()
       {
          Item i = (Item)_addItemCombo.SelectedItem;
@@ -359,11 +370,18 @@ namespace IACampaignLog
          if (_itemListView.SelectedItems.Count > 0)
          {
             Agenda discardMe = (_player as ImperialPlayer).PurchasedAgendas.Where((x) => x.Id.Equals(int.Parse(_itemListView.SelectedItems[0].Text))).SingleOrDefault();
-            if (discardMe != null)
+            if (discardMe != null && MessageBox.Show(String.Format("Discard Agenda card? This will cost the heroes ${0}", discardMe.DiscardCost), "Discard Agenda", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-               (_player as ImperialPlayer).PurchasedAgendas.Remove(discardMe);
-               RefreshItemsAgendasListView();
-               (_player as ImperialPlayer).RaiseAgendaDiscardedEvent(this);
+               if (AgendaDiscarded == null || AgendaDiscarded(this, discardMe, EventArgs.Empty))
+               {
+                  (_player as ImperialPlayer).PurchasedAgendas.Remove(discardMe);
+                  RefreshItemsAgendasListView();
+                  (_player as ImperialPlayer).RaiseAgendaDiscardedEvent(this);
+               }
+               else
+               {
+                  MessageBox.Show("Not enough credits to discard selected Agenda.\nCost $" + discardMe.DiscardCost);
+               }
             }
          }
          RefreshItemsAgendasListView();

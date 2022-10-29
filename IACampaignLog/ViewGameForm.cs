@@ -211,6 +211,7 @@ namespace IACampaignLog
          _playerListPanel.Controls.Add(_impPlayerControl);
          _impPlayerControl.LoadImperialPlayer(_currentGame.ImpPlayer, _currentGame.SelectedAgendaSets);
          _impPlayerControl.AgendaPurchased += HandleImpPlayerControlAgendaPurchased;
+         _impPlayerControl.AgendaDiscarded += HandleImpPlayerControlAgendaDiscarded;
          ypos = _impPlayerControl.Location.Y + _impPlayerControl.Height + 5;
          
          foreach (HeroPlayer h in _currentGame.Heroes)
@@ -247,6 +248,22 @@ namespace IACampaignLog
          
          return allowed;
       }
+
+      private bool PlayerSpendCredits(int cost)
+      {
+         if (_currentGame.HeroCreditsPool - cost >= 0)
+         {
+            _currentGame.HeroCreditsPool -= cost;
+            return true;
+         }
+         else
+            return false;
+      }
+
+      bool HandleImpPlayerControlAgendaDiscarded (object sender, Agenda a, EventArgs e)
+      {
+         return PlayerSpendCredits(a.DiscardCost);
+      }
       
       void Handle_currentGameCreditsChanged (object sender, EventArgs e)
       {
@@ -255,13 +272,7 @@ namespace IACampaignLog
 
       bool HandlePlayerControlItemPurchased (object sender, Item i, EventArgs e)
       {
-         if (_currentGame.HeroCreditsPool - i.CreditCost >= 0)
-         {
-            _currentGame.HeroCreditsPool -= i.CreditCost;
-            return true;
-         }
-         else
-            return false;
+         return PlayerSpendCredits(i.CreditCost);
       }
 
       bool HandlePlayerControlItemSold(object sender, Item i, EventArgs e)

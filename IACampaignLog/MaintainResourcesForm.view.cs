@@ -14,7 +14,7 @@ namespace IACampaignLog
                        _sideMissionTypeCombo, _threatMissionBaneCombo, _characterSideMissionCombo, 
                        _campaignMissionTypeCombo, _campaignMissionNameCombo,
                        _campaignMissionItemTiersCombo, _rewardTypeCombo;
-      private TextBox _nameText, _agendaInfluenceText, _itemCreditText, _classXpText;
+      private TextBox _nameText, _agendaInfluenceText, _itemCreditText, _classXpText, _agendaDiscardCostText;
       private Button _addButton, _saveButton, _cancelButton, _campaignAddMissionButton,
                      _campaignSaveMissionButton, _campaignCancelMissionButton;
       private Label _agendaSetLabel, _nameLabel, _agendaInfluenceLabel, _classSetLabel,
@@ -23,7 +23,7 @@ namespace IACampaignLog
                     _campaignStartingRebelXPLabel, _campaignStartingImpXPLabel,
                     _campaignStartingInfluenceLabel, _campaignStartingCreditsLabel,
                     _campaignMissionNameLabel, _campaignMissionTypeLabel, _rewardTypeLabel,
-                    _campaignMissionThreatLevelLabel, _campaignMissionItemTiersLabel;
+                    _campaignMissionThreatLevelLabel, _campaignMissionItemTiersLabel, _agendaDiscardCostLabel;
       private ListView _agendasListView, _charactersListView, _classesListView, 
                      _itemsListView, _rewardsListView, _sideMissionsListView, _threatMissionListView,
                      _storyMissionsListView, _campaignListView, _campaignMissionListView;
@@ -94,15 +94,26 @@ namespace IACampaignLog
          _agendaPanel.Controls.Add(_agendaSetCombo);
          //Agenda influence label
          _agendaInfluenceLabel = new Label();
-         _agendaInfluenceLabel.Size = new System.Drawing.Size(250, 20);
+         _agendaInfluenceLabel.Size = new System.Drawing.Size(200, 20);
          _agendaInfluenceLabel.Location = new System.Drawing.Point(5, 145);
          _agendaInfluenceLabel.Text = "Influence";
          _agendaPanel.Controls.Add(_agendaInfluenceLabel);
          //Agenda influence text box
          _agendaInfluenceText = new TextBox();
-         _agendaInfluenceText.Size = new System.Drawing.Size(250, 30);
+         _agendaInfluenceText.Size = new System.Drawing.Size(200, 30);
          _agendaInfluenceText.Location = new System.Drawing.Point(5, 165);
          _agendaPanel.Controls.Add(_agendaInfluenceText);
+         //Agenda discard cost label
+         _agendaDiscardCostLabel = new Label();
+         _agendaDiscardCostLabel.Size = new System.Drawing.Size(200, 20);
+         _agendaDiscardCostLabel.Location =  new System.Drawing.Point(225, 145);
+         _agendaDiscardCostLabel.Text = "Discard Cost";
+         _agendaPanel.Controls.Add(_agendaDiscardCostLabel);
+         //Agenda discard cost text box
+         _agendaDiscardCostText = new TextBox();
+         _agendaDiscardCostText.Size = new System.Drawing.Size(200, 30);
+         _agendaDiscardCostText.Location = new System.Drawing.Point(225, 165);
+         _agendaPanel.Controls.Add(_agendaDiscardCostText);
          //Agenda type combo
          _agendaTypeCombo = new ComboBox();
          _agendaTypeCombo.Size = new System.Drawing.Size(100, 30);
@@ -111,7 +122,7 @@ namespace IACampaignLog
          _agendaPanel.Controls.Add(_agendaTypeCombo);
          //Agendas list view
          _agendasListView = new ListView();
-         _agendasListView.Size = new System.Drawing.Size(470, 170);
+         _agendasListView.Size = new System.Drawing.Size(475, 170);
          _agendasListView.Location = new System.Drawing.Point(5, 240);
          _agendasListView.FullRowSelect = true;
          _agendasListView.MultiSelect = false;
@@ -121,11 +132,13 @@ namespace IACampaignLog
          _agendasListView.Columns.Add("Name");
          _agendasListView.Columns.Add("INF");
          _agendasListView.Columns.Add("Type");
+         _agendasListView.Columns.Add("DC");
          _agendasListView.Columns[0].Width = 0;
-         _agendasListView.Columns[1].Width += 100;
-         _agendasListView.Columns[2].Width += 100;
-         _agendasListView.Columns[3].Width -= 20;
+         _agendasListView.Columns[1].Width += 90;
+         _agendasListView.Columns[2].Width += 90;
+         _agendasListView.Columns[3].Width -= 30;
          _agendasListView.Columns[4].Width += 20;
+         _agendasListView.Columns[5].Width -= 20;
          _agendaPanel.Controls.Add(_agendasListView);
          
          //Campaign panel

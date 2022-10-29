@@ -13,14 +13,16 @@ namespace IACampaignLog
          Secret
       }
       
-      public Agenda (int id, string name, int influenceCost, AgendaType agendaType) : base(id, name)
+      public Agenda (int id, string name, int influenceCost, AgendaType agendaType, int discardCost) : base(id, name)
       {
          InfluenceCost = influenceCost;
          AgendaCardType = agendaType;
+         DiscardCost = discardCost;
       }
       
       public int InfluenceCost {get; set;}
       public AgendaType AgendaCardType {get; set;}
+      public int DiscardCost { get; set;}
       
       public XElement Serialise()
       {
@@ -29,6 +31,7 @@ namespace IACampaignLog
          x.SetAttributeValue("name", this.Name);
          x.SetAttributeValue("cost", this.InfluenceCost);
          x.SetAttributeValue("agendatype", this.AgendaCardType);
+         x.SetAttributeValue("discardCost", this.DiscardCost);
          return x;
       }
       
@@ -37,10 +40,13 @@ namespace IACampaignLog
          int id = int.Parse(toObject.Attribute("id").Value);
          string name = toObject.Attribute("name").Value;
          int cost = int.Parse(toObject.Attribute("cost").Value);
+         int discardCost = 0;
          AgendaType agendaType = AgendaType.Secret;
          if (toObject.Attribute("agendatype") != null)
             agendaType = (AgendaType)Enum.Parse(typeof(AgendaType), toObject.Attribute("agendatype").Value);
-         Agenda newObj = new Agenda(id, name, cost, agendaType);
+         if (toObject.Attribute("discardCost") != null)
+            discardCost = int.Parse(toObject.Attribute("discardCost").Value);
+         Agenda newObj = new Agenda(id, name, cost, agendaType, discardCost);
          return newObj;
       }
    }

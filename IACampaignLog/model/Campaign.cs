@@ -48,18 +48,28 @@ namespace IACampaignLog
          x.Add(missionsElem);
          return x;
       }
+
+      private static bool ParseBoolAttributeValue(string attributeName, XElement xmlWithAttribute, bool defaultValue = true)
+      {
+         return xmlWithAttribute.Attribute(attributeName) != null ? bool.Parse(xmlWithAttribute.Attribute(attributeName).Value) : defaultValue;
+      }
+      
+      private static int ParseIntAttributeValue(string attributeName, XElement xmlWithAttribute, int defaultValue = 0)
+      {
+         return xmlWithAttribute.Attribute(attributeName) != null ? int.Parse(xmlWithAttribute.Attribute(attributeName).Value) : defaultValue;
+      }
       
       public static Campaign Deserialise(XElement toObject)
       {
-         int id = int.Parse(toObject.Attribute("id").Value);
+         int id = ParseIntAttributeValue("id", toObject);
          string name = toObject.Attribute("name").Value;
-         bool allowSides = bool.Parse(toObject.Attribute("allowsidemissions").Value);
-         bool allowForced = bool.Parse(toObject.Attribute("allowforcedmissions").Value);
-         bool includeThreat = bool.Parse(toObject.Attribute("includethreatmissions").Value);
-         int startingCredits = int.Parse(toObject.Attribute("startingcredits").Value);
-         int startingImpXp = int.Parse(toObject.Attribute("startingimpxp").Value);
-         int startingInfluence = int.Parse(toObject.Attribute("startinginfluence").Value);
-         int startingRebelXp = int.Parse(toObject.Attribute("startingrebelxp").Value);
+         bool allowSides = ParseBoolAttributeValue("allowsidemissions", toObject);
+         bool allowForced = ParseBoolAttributeValue("allowforcedmissions", toObject);
+         bool includeThreat = ParseBoolAttributeValue("includethreatmissions", toObject, false);
+         int startingCredits = ParseIntAttributeValue("startingcredits", toObject);
+         int startingImpXp = ParseIntAttributeValue("startingimpxp", toObject);
+         int startingInfluence = ParseIntAttributeValue("startinginfluence", toObject);
+         int startingRebelXp = ParseIntAttributeValue("startingrebelxp", toObject);
          IList<MissionHeader> missions = (from XElement x in toObject.Element("MissionTemplate").Elements("Mission")
                                           select MissionHeader.Deserialise(x)).ToList();
          Campaign newObj = new Campaign(id, name, missions){

@@ -46,3 +46,4 @@ bld/
 *.scc
 *.pidb
 *.mdproj
+/.vs/slnx.sqlite

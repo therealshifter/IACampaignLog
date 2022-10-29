@@ -29,12 +29,12 @@ namespace IACampaignLog
          return base.FindTInSetWithName(setId, name);
       }
       
-      public Agenda AddAgenda(CardSet<Agenda> agendaSet, string name, int influence, Agenda.AgendaType agendaType)
+      public Agenda AddAgenda(CardSet<Agenda> agendaSet, string name, int influence, Agenda.AgendaType agendaType, int discardCost)
       {
          if (string.IsNullOrEmpty(name))
          {throw new ArgumentException("Agenda name cannot be null or empty");}
          
-         return base.AddToSet(agendaSet, (x) => new Agenda(x, name, influence, agendaType));
+         return base.AddToSet(agendaSet, (x) => new Agenda(x, name, influence, agendaType, discardCost));
       }
       
    }

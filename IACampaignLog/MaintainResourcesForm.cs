@@ -221,6 +221,7 @@ namespace IACampaignLog
                   _agendaSetCombo.SelectedItem = (CardSet<Agenda>)lvi.Tag;
                   _agendaTypeCombo.SelectedValue = selectedAgenda.AgendaCardType;
                   _agendaInfluenceText.Text = selectedAgenda.InfluenceCost.ToString();
+                  _agendaDiscardCostText.Text = selectedAgenda.DiscardCost.ToString();
                   _agendaSetCombo.Enabled = false;
                }
                else if (sender == _campaignListView)
@@ -346,7 +347,7 @@ namespace IACampaignLog
                   }
                   if (selected == null)
                   {
-                     AgendaController.GetInstance().AddAgenda(selectedSet, _nameText.Text, int.Parse(_agendaInfluenceText.Text), (Agenda.AgendaType)_agendaTypeCombo.SelectedValue);
+                     AgendaController.GetInstance().AddAgenda(selectedSet, _nameText.Text, int.Parse(_agendaInfluenceText.Text), (Agenda.AgendaType)_agendaTypeCombo.SelectedValue, int.Parse(_agendaDiscardCostText.Text));
                      MessageBox.Show("Agenda added successfully");
                   }
                   else
@@ -354,6 +355,7 @@ namespace IACampaignLog
                      selected.Name = _nameText.Text;
                      selected.InfluenceCost = int.Parse(_agendaInfluenceText.Text);
                      selected.AgendaCardType = (Agenda.AgendaType)_agendaTypeCombo.SelectedValue;
+                     selected.DiscardCost = int.Parse(_agendaDiscardCostText.Text);
                      AgendaController.GetInstance().HasChanges = true;
                      MessageBox.Show("Agenda saved successfully");
                   }
@@ -633,6 +635,7 @@ namespace IACampaignLog
       {
          _nameText.Text = string.Empty;
          _agendaInfluenceText.Text = string.Empty;
+         _agendaDiscardCostText.Text = string.Empty;
          _agendaSetList = new List<CardSet<Agenda>>(AgendaController.GetInstance().ListOfT);
          _agendaSetCombo.Enabled = true;
          _agendaSetCombo.DataSource = null;
@@ -652,7 +655,8 @@ namespace IACampaignLog
                                        csa.Name,
                                        a.Name,
                                        a.InfluenceCost.ToString(),
-                                       a.AgendaCardType.ToString()});
+                                       a.AgendaCardType.ToString(),
+                                       a.DiscardCost.ToString()});
                   lvi.Tag = csa;
                   _agendasListView.Items.Add(lvi);
                }
@@ -972,6 +976,25 @@ namespace IACampaignLog
                         {
                            isValid = false;
                            MessageBox.Show("Influence must be a whole number");
+                        }
+                     }
+                  }
+                  if (isValid)
+                  {
+                     if (string.IsNullOrWhiteSpace(_agendaDiscardCostText.Text))
+                     {
+                        isValid = false;
+                        MessageBox.Show("Discard cost must not be empty");
+                     }
+                     else
+                     {
+                        int discardCost;
+                        if (int.TryParse(_agendaDiscardCostText.Text, out discardCost))
+                           isValid = true;
+                        else
+                        {
+                           isValid = false;
+                           MessageBox.Show("Discard cost must be a whole number");
                         }
                      }
                   }
