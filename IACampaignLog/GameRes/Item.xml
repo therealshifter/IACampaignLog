@@ -36,4 +36,27 @@
   <Item id="33" name="Telescoping Sights" cost="400" tier="III" />
   <Item id="34" name="Combat Coat" cost="500" tier="II" />
   <Item id="35" name="Laminate Armor" cost="700" tier="III" />
+  <Item id="36" name="Tatooine Hunting Rifle" cost="250" tier="I" />
+  <Item id="37" name="Gaffi Stick" cost="200" tier="I" />
+  <Item id="38" name="EE-3 Carbine" cost="550" tier="II" />
+  <Item id="39" name="Plasma Cell" cost="450" tier="II" />
+  <Item id="40" name="Hidden Blade" cost="300" tier="III" />
+  <Item id="41" name="DLT-19" cost="950" tier="III" />
+  <Item id="42" name="Ancient Lightsaber" cost="1000" tier="III" />
+  <Item id="43" name="Under-Barrel HH-4" cost="300" tier="I" />
+  <Item id="44" name="Vibroknife" cost="150" tier="I" />
+  <Item id="45" name="DDC Defender" cost="550" tier="I" />
+  <Item id="46" name="Cybernetic Arm" cost="350" tier="II" />
+  <Item id="47" name="Environment Hazard Suit" cost="600" tier="II" />
+  <Item id="48" name="Stun Baton" cost="500" tier="II" />
+  <Item id="49" name="Valken-38 Carbine" cost="1250" tier="III" />
+  <Item id="50" name="Vibrogenerator" cost="350" tier="III" />
+  <Item id="51" name="Concussion Grenades" cost="400" tier="III" />
+  <Item id="52" name="Vibrosword" cost="350" tier="I" />
+  <Item id="53" name="Shadowsilk Cloak" cost="350" tier="I" />
+  <Item id="54" name="R5 Astromech" cost="250" tier="II" />
+  <Item id="55" name="Weighted Head" cost="400" tier="II" />
+  <Item id="56" name="Sniper Scope" cost="250" tier="III" />
+  <Item id="57" name="Disruptor Pistol" cost="700" tier="III" />
+  <Item id="58" name="Electrostaff" cost="1250" tier="III" />
 </Resource>

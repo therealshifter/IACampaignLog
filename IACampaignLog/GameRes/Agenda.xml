@@ -55,4 +55,84 @@
     <Agenda id="31" name="To the Last Man" cost="2" agendatype="Secret" />
     <Agenda id="32" name="Bunker Buster" cost="3" agendatype="SideMission" />
   </Set>
+  <Set id="11" name="Pursuit Of The Enemy" character="-1">
+    <Agenda id="33" name="Strike and Subdue" cost="1" agendatype="Secret" />
+    <Agenda id="34" name="Death Mark" cost="2" agendatype="Ongoing" />
+    <Agenda id="35" name="Fire in the Sky" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="12" name="The Empire's Reach" character="-1">
+    <Agenda id="36" name="Advanced Prototypes" cost="1" agendatype="Secret" />
+    <Agenda id="37" name="Data Security" cost="2" agendatype="Ongoing" />
+    <Agenda id="38" name="Infiltrated" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="13" name="Base Instincts" character="-1">
+    <Agenda id="39" name="Furious Retaliation" cost="1" agendatype="Secret" />
+    <Agenda id="40" name="On The Hunt" cost="1" agendatype="Ongoing" />
+    <Agenda id="41" name="Gunrunner" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="14" name="Crimson Empire" character="-1">
+    <Agenda id="42" name="Best of the Best" cost="1" agendatype="Secret" />
+    <Agenda id="43" name="Pulling the Strings" cost="1" agendatype="Ongoing" />
+    <Agenda id="44" name="Infection" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="15" name="Natural Warfare" character="-1">
+    <Agenda id="45" name="Exposed to the Elements" cost="1" agendatype="Secret" />
+    <Agenda id="46" name="Bestial Fury" cost="1" agendatype="Secret" />
+    <Agenda id="47" name="Unchained" cost="2" agendatype="Ongoing" />
+  </Set>
+  <Set id="16" name="Defensive Tactics" character="-1">
+    <Agenda id="48" name="Enhanced Armor" cost="1" agendatype="Secret" />
+    <Agenda id="49" name="Counter-Strike" cost="1" agendatype="Secret" />
+    <Agenda id="50" name="Personal Shield Generators" cost="2" agendatype="Ongoing" />
+  </Set>
+  <Set id="17" name="Evasive Maneuvers" character="-1">
+    <Agenda id="51" name="Feigned Retreat" cost="1" agendatype="Secret" />
+    <Agenda id="52" name="Contingency Plan" cost="1" agendatype="Secret" />
+    <Agenda id="53" name="Hasty Ambush" cost="2" agendatype="Secret" />
+  </Set>
+  <Set id="18" name="Enhanced Interrogation" character="-1">
+    <Agenda id="54" name="Weak Links" cost="1" agendatype="Secret" />
+    <Agenda id="55" name="Blackmail" cost="2" agendatype="Ongoing" />
+    <Agenda id="56" name="Learn Their Weaknesses" cost="1" agendatype="Secret" />
+  </Set>
+  <Set id="19" name="Nefarious Dealings" character="-1">
+    <Agenda id="57" name="Final Blast" cost="2" agendatype="Ongoing" />
+    <Agenda id="58" name="Trade Routes Disrupted" cost="2" agendatype="Secret" />
+    <Agenda id="59" name="Back-Room Bargains" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="20" name="Punishing Tactics" character="-1">
+    <Agenda id="60" name="Targeted Cruelty" cost="1" agendatype="Secret" />
+    <Agenda id="61" name="Beaten Down" cost="2" agendatype="Ongoing" />
+    <Agenda id="62" name="A Bounty Protected" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="21" name="Inquisition" character="-1">
+    <Agenda id="63" name="When They Least Expect It" cost="1" agendatype="Secret" />
+    <Agenda id="64" name="Targeted By The Empire" cost="2" agendatype="Secret" />
+    <Agenda id="65" name="Cornered" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="22" name="Desert Scavengers" character="-1">
+    <Agenda id="66" name="Jawa Raid" cost="1" agendatype="Secret" />
+    <Agenda id="67" name="Ion Blasters" cost="1" agendatype="Secret" />
+    <Agenda id="68" name="Salvage Operatives" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="23" name="Stormtrooper Support" character="-1">
+    <Agenda id="69" name="Perpetual Reinforcements" cost="1" agendatype="Secret" />
+    <Agenda id="70" name="Military Presence" cost="1" agendatype="Secret" />
+    <Agenda id="71" name="Strength Of Command" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="24" name="Imperial Intelligence" character="-1">
+    <Agenda id="72" name="Classified Techniques" cost="1" agendatype="Secret" />
+    <Agenda id="73" name="Under Surveillance" cost="2" agendatype="Secret" />
+    <Agenda id="74" name="Security Breach" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="25" name="Contract Gunmen" character="-1">
+    <Agenda id="75" name="Hunter For A Fee" cost="1" agendatype="Secret" />
+    <Agenda id="76" name="Stealth Squad" cost="1" agendatype="Secret" />
+    <Agenda id="77" name="Top Target" cost="3" agendatype="SideMission" />
+  </Set>
+  <Set id="26" name="Infiltration" character="-1">
+    <Agenda id="78" name="Misdirection" cost="1" agendatype="Secret" />
+    <Agenda id="79" name="Trip Mine" cost="1" agendatype="Secret" />
+    <Agenda id="80" name="Qiuet Entry" cost="1" agendatype="Secret" />
+  </Set>
 </Resource>

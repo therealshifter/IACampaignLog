@@ -1,34 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Resource>
-  <Reward id="0" name="Imperial Industry" />
-  <Reward id="1" name="Shadow Suit" />
-  <Reward id="2" name="Shu Yen's Lightsaber" />
-  <Reward id="3" name="501st Training" />
-  <Reward id="4" name="Special Operations" />
-  <Reward id="5" name="Old Wounds" />
-  <Reward id="6" name="Supply Deficit" />
-  <Reward id="7" name="Heroic" />
-  <Reward id="8" name="Legendary" />
-  <Reward id="9" name="Peacemaker" />
-  <Reward id="10" name="Life Debt" />
-  <Reward id="11" name="Fearless Leader" />
-  <Reward id="12" name="Veteran Prowess" />
-  <Reward id="13" name="The Ways of the Force" />
-  <Reward id="14" name="Allied Operations" />
-  <Reward id="15" name="Rebel Recon" />
-  <Reward id="16" name="Adrenal Implant" />
-  <Reward id="17" name="Intimidation" />
-  <Reward id="18" name="Quickdraw Holster" />
-  <Reward id="19" name="Boba Fett (villain)" />
-  <Reward id="20" name="IG-88 (villain)" />
-  <Reward id="21" name="Han Solo, Scoundrel (ally)" />
-  <Reward id="22" name="Luke Skywalker, Hero of the Rebellion (ally)" />
-  <Reward id="23" name="Chewbacca, Loyal Wookiee (ally)" />
-  <Reward id="24" name="Rebel Saboteur (ally)" />
-  <Reward id="25" name="Rebel Trooper (ally)" />
-  <Reward id="26" name="R2-D2 (ally)" />
-  <Reward id="27" name="C-3PO (ally)" />
-  <Reward id="28" name="General Weiss (villain)" />
-  <Reward id="29" name="Royal Guard Champion (villain)" />
-  <Reward id="30" name="Darth Vader, Lord of the Sith (villain)" />
+  <Reward id="0" name="Imperial Industry" rewardtype="Regular" />
+  <Reward id="1" name="Shadow Suit" rewardtype="Item" />
+  <Reward id="2" name="Shu Yen's Lightsaber" rewardtype="Item" />
+  <Reward id="3" name="501st Training" rewardtype="Regular" />
+  <Reward id="4" name="Special Operations" rewardtype="Regular" />
+  <Reward id="5" name="Old Wounds" rewardtype="Regular" />
+  <Reward id="6" name="Supply Deficit" rewardtype="Regular" />
+  <Reward id="7" name="Heroic" rewardtype="Regular" />
+  <Reward id="8" name="Legendary" rewardtype="Regular" />
+  <Reward id="9" name="Peacemaker" rewardtype="Regular" />
+  <Reward id="10" name="Life Debt" rewardtype="Regular" />
+  <Reward id="11" name="Fearless Leader" rewardtype="Regular" />
+  <Reward id="12" name="Veteran Prowess" rewardtype="Regular" />
+  <Reward id="13" name="The Ways of the Force" rewardtype="Regular" />
+  <Reward id="14" name="Allied Operations" rewardtype="Regular" />
+  <Reward id="15" name="Rebel Recon" rewardtype="Regular" />
+  <Reward id="16" name="Adrenal Implant" rewardtype="Item" />
+  <Reward id="17" name="Intimidation" rewardtype="Regular" />
+  <Reward id="18" name="Quickdraw Holster" rewardtype="Regular" />
+  <Reward id="19" name="Boba Fett, Infamous Bounty Hunter (villain)" rewardtype="Villain" />
+  <Reward id="20" name="IG-88, Assassin Droid (villain)" rewardtype="Villain" />
+  <Reward id="21" name="Han Solo, Scoundrel (ally)" rewardtype="Ally" />
+  <Reward id="22" name="Luke Skywalker, Hero of the Rebellion (ally)" rewardtype="Ally" />
+  <Reward id="23" name="Chewbacca, Loyal Wookiee (ally)" rewardtype="Ally" />
+  <Reward id="24" name="Rebel Saboteur (ally)" rewardtype="Ally" />
+  <Reward id="25" name="Rebel Trooper (ally)" rewardtype="Ally" />
+  <Reward id="26" name="R2-D2, Loyal Astromech (ally)" rewardtype="Ally" />
+  <Reward id="27" name="C-3PO, Human-Cyborg Relations (ally)" rewardtype="Ally" />
+  <Reward id="28" name="General Weiss, Field Commander (villain)" rewardtype="Villain" />
+  <Reward id="29" name="Royal Guard Champion (villain)" rewardtype="Villain" />
+  <Reward id="30" name="Darth Vader, Lord of the Sith (villain)" rewardtype="Villain" />
+  <Reward id="31" name="Kayn Somos, Trooper Commander (villain)" rewardtype="Villain" />
+  <Reward id="32" name="Obi-Wan Kenobi, Jedi Knight (ally)" rewardtype="Ally" />
+  <Reward id="33" name="Leia Organa, Rebel Commander (ally)" rewardtype="Ally" />
+  <Reward id="34" name="Bossk, Born Hunter (villain)" rewardtype="Villain" />
+  <Reward id="35" name="Tech Goggles" rewardtype="Item" />
+  <Reward id="36" name="Hunt Them Down" rewardtype="Regular" />
+  <Reward id="37" name="Counterparts" rewardtype="Regular" />
+  <Reward id="38" name="Bounty" rewardtype="Regular" />
+  <Reward id="39" name="Surveillance Operatives" rewardtype="Regular" />
+  <Reward id="40" name="Constant Advantage (Bane)" rewardtype="Bane" />
+  <Reward id="41" name="Distractions (Bane)" rewardtype="Bane" />
+  <Reward id="42" name="Supply Disruption (Bane)" rewardtype="Bane" />
+  <Reward id="43" name="Weary From Toil (Bane)" rewardtype="Bane" />
+  <Reward id="44" name="Networks Restored (Boon)" rewardtype="Boon" />
+  <Reward id="45" name="Invigorated by Success (Boon)" rewardtype="Boon" />
+  <Reward id="46" name="Strategy Executed (Boon)" rewardtype="Boon" />
+  <Reward id="47" name="Resurgence (Boon)" rewardtype="Boon" />
+  <Reward id="48" name="Iron Hand" rewardtype="Regular" />
+  <Reward id="49" name="Battle Vision" rewardtype="Regular" />
+  <Reward id="50" name="Systems Upgrade" rewardtype="Regular" />
+  <Reward id="51" name="Radiant Holocron" rewardtype="Regular" />
+  <Reward id="52" name="Cam Droid" rewardtype="Regular" />
+  <Reward id="53" name="Lobot's Favor" rewardtype="Regular" />
+  <Reward id="54" name="Under the Radar" rewardtype="Regular" />
+  <Reward id="55" name="Relief Effort" rewardtype="Regular" />
+  <Reward id="56" name="Mercenary Ties" rewardtype="Regular" />
+  <Reward id="57" name="Mechanical Salvage" rewardtype="Regular" />
+  <Reward id="58" name="Cautious Approach" rewardtype="Regular" />
+  <Reward id="59" name="Tactical Advance" rewardtype="Regular" />
 </Resource>

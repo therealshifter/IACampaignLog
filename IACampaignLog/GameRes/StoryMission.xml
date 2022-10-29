@@ -16,4 +16,20 @@
   <StoryMission id="13" name="Return To Echo Base" campaign="2" />
   <StoryMission id="14" name="Our Last Hope" campaign="2" />
   <StoryMission id="15" name="Reclamation" campaign="3" />
+  <StoryMission id="16" name="Past Life Enemies" campaign="1" />
+  <StoryMission id="17" name="Shady Dealings" campaign="1" />
+  <StoryMission id="18" name="Canyon Run" campaign="1" />
+  <StoryMission id="19" name="Fire In The Sky" campaign="1" />
+  <StoryMission id="20" name="Infiltrated" campaign="1" />
+  <StoryMission id="21" name="White Noise" campaign="2" />
+  <StoryMission id="22" name="Home Front" campaign="2" />
+  <StoryMission id="23" name="One Step Behind" campaign="2" />
+  <StoryMission id="24" name="Rescue Ops" campaign="2" />
+  <StoryMission id="25" name="The Last Line" campaign="2" />
+  <StoryMission id="26" name="Disaster" campaign="2" />
+  <StoryMission id="27" name="Reclassified" campaign="3" />
+  <StoryMission id="28" name="Panic in the Streets" campaign="3" />
+  <StoryMission id="29" name="Freedom Fighters" campaign="3" />
+  <StoryMission id="30" name="Cloud City's Secret" campaign="3" />
+  <StoryMission id="31" name="Hostile Takeover" campaign="3" />
 </Resource>

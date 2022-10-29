@@ -20,4 +20,24 @@
   <SideMission id="17" name="Celebration" missiontype="Grey" />
   <SideMission id="18" name="Viper's Den" missiontype="Grey" />
   <SideMission id="19" name="Captured" missiontype="Forced" />
+  <SideMission id="20" name="Hunted Down" missiontype="Green" />
+  <SideMission id="21" name="Past Life Enemies" missiontype="Red" />
+  <SideMission id="22" name="Shady Dealings" missiontype="Red" />
+  <SideMission id="23" name="Canyon Run" missiontype="Grey" />
+  <SideMission id="24" name="Armed and Operational" missiontype="Green" />
+  <SideMission id="25" name="Communication Breakdown" missiontype="Green" />
+  <SideMission id="26" name="Deadly Transmission" missiontype="Green" />
+  <SideMission id="27" name="Know Your Enemy" missiontype="Red" />
+  <SideMission id="28" name="Constant Vigilance" missiontype="Red" />
+  <SideMission id="29" name="Preventative Measures" missiontype="Red" />
+  <SideMission id="30" name="Reclassified" missiontype="Red" />
+  <SideMission id="31" name="Panic in the Streets" missiontype="Red" />
+  <SideMission id="32" name="Reclamation" missiontype="Green" />
+  <SideMission id="33" name="Freedom Fighters" missiontype="Grey" />
+  <SideMission id="34" name="Cloud City's Secret" missiontype="Grey" />
+  <SideMission id="35" name="Hostile Takeover" missiontype="Grey" />
+  <SideMission id="36" name="Precious Cargo" missiontype="Green" />
+  <SideMission id="37" name="Brute Force" missiontype="Green" />
+  <SideMission id="38" name="Paying Debts" missiontype="Grey" />
+  <SideMission id="39" name="Into The Unknown" missiontype="Grey" />
 </Resource>

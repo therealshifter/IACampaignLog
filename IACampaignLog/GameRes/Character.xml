@@ -6,4 +6,11 @@
   <Character id="3" name="Gideon Argus" sidemission="4" />
   <Character id="4" name="Jyn Odan" sidemission="5" />
   <Character id="5" name="Mak Eshka'rey" sidemission="1" />
+  <Character id="6" name="Biv Bodhrik" sidemission="21" />
+  <Character id="7" name="Saska Teft" sidemission="22" />
+  <Character id="8" name="Verena Talos" sidemission="27" />
+  <Character id="9" name="Loku Kanoloa" sidemission="28" />
+  <Character id="10" name="MHD-19" sidemission="29" />
+  <Character id="11" name="Davith Elso" sidemission="30" />
+  <Character id="12" name="Murne Rin" sidemission="31" />
 </Resource>
